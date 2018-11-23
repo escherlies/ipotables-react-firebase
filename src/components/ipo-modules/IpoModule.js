@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
-import Thing from './Thing';
+import ListItem from '../ListItem';
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSignInAlt, faSignOutAlt, faMagic, faInfoCircle, faCube } from '@fortawesome/free-solid-svg-icons'
 import AddThing from './AddThing';
 import faker from 'faker'
-import ButtonColored from './ui/buttons/ButtonColored';
-import firebaseApp from '../functions/firebaseApp';
+import ButtonColored from '../ui/buttons/ButtonColored';
+import firebaseApp from '../../functions/firebaseApp';
 
 
 class IpoModule extends Component {
@@ -30,7 +30,7 @@ class IpoModule extends Component {
     })
   }
 
-  renderThingsOfModule = things => <div>{_.map(things, (thing, key) => <Thing key={key} title={_.get(this.props.things, `${key}.name`)} />)}</div>
+  renderThingsOfModule = things => <div>{_.map(things, (thing, key) => <ListItem key={key} title={_.get(this.props.things, `${key}.name`)} linkTo={`/things/${key}`} />)}</div>
 
   addThingTo = (target) => (key) => {
     const copy = _.cloneDeep(this.state[target])

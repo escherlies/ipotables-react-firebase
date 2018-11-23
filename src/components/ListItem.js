@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
-class Thing extends Component {
+class ListItem extends Component {
 
   state = {}
 
@@ -9,18 +10,21 @@ class Thing extends Component {
 
     return (
       <Div>
-        {this.props.title}
+        <Link to={this.props.linkTo || ''} >
+          <div style={{ padding: 8 }}>
+            {this.props.title}
+          </div>
+        </Link>
       </Div>
     )
   }
 }
 
-export default Thing
+export default ListItem
 
 
 const Div = styled.div`
 
-  padding: 8px;
   border-style: solid;
   border-color: #BFD7EA;
   border-width: 1px 1px 0px 1px;

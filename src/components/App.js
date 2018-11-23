@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import IpoModule from './IpoModule';
 import base from '../functions/base';
 import _ from 'lodash'
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom'
-import IpoModulesList from './IpoModulesList';
-import ButtonColored from './ui/buttons/ButtonColored';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft, faCube, faBox, faPuzzlePiece, faLemon } from '@fortawesome/free-solid-svg-icons';
-import ThingsList from './ThingsList';
+import { faArrowLeft, faCube, faLemon } from '@fortawesome/free-solid-svg-icons';
+import IpoModulesList from './ipo-modules/IpoModulesList';
+import ButtonColored from './ui/buttons/ButtonColored';
+import IpoModule from './ipo-modules/IpoModule';
+import ThingsList from './ipo-things/ThingsList';
+import Thing from './ipo-things/Thing';
+
 
 class App extends Component {
 
@@ -38,6 +40,7 @@ class App extends Component {
 
           <Route exact path='/modules' render={() => <IpoModulesList modules={modules} readOnly={true} />} />
           <Route exact path='/things' render={() => <ThingsList things={things} readOnly={true} />} />
+          <Route exact path='/things/:thingKey' render={({ match }) => <Thing thing={_.get(things, match.params.thingKey)} modules={modules} />} />
 
           <Switch>
             <Route exact path='/modules/add-new-module' render={({ history }) => <IpoModule things={things} goBack={() => history.push('/modules')} />} />
