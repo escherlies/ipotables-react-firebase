@@ -29,15 +29,15 @@ class IpoModule extends Component {
     })
   }
 
-  renderThings = things => <div>{_.map(things, (thing, key) => <Thing key={key} title={thing} />)}</div>
+  renderThingsOfModule = things => <div>{_.map(things, (thing, key) => <Thing key={key} title={_.get(this.props.things, `${key}.name`)} />)}</div>
 
-  addThing = (value, target) => {
+  addThingTo = (target) => (key) => {
     const copy = _.cloneDeep(this.state[target])
-    copy[_.size(copy)] = value
+    copy[key] = true
     this.setState({ [target]: copy })
   }
 
-  handleInputChange = event => {
+  handleTextInputChange = event => {
     const { value, name } = event.target
     this.setState({ [name]: value })
   }
@@ -45,24 +45,26 @@ class IpoModule extends Component {
   render() {
 
     const { title, moduleDescription, inputs, processDescription, outputs } = this.state
+    const { things, modules } = this.props
+    const options = _.map(things, (thing, key) => ({ key, ...thing }))
 
     return (
       <div style={{ margin: 50, maxWidth: 900 }} >
 
         <Header><FontAwesomeIcon icon={faCube} /> Title:</Header>
-        <Input name="title" value={title} onChange={this.handleInputChange} />
+        <Input name="title" value={title} onChange={this.handleTextInputChange} />
         <Seperator />
 
         <Header><FontAwesomeIcon icon={faInfoCircle} /> Description:</Header>
-        <Input name="moduleDescription" value={moduleDescription} onChange={this.handleInputChange} />
+        <Input name="moduleDescription" value={moduleDescription} onChange={this.handleTextInputChange} />
         <Seperator />
 
         <FlexBox>
           <Column>
             <Header><FontAwesomeIcon icon={faSignInAlt} /> INPUTS</Header>
-            {this.renderThings(inputs)}
+            {this.renderThingsOfModule(inputs)}
 
-            <AddThing addThing={(input) => this.addThing(input, 'inputs')} />
+            <AddThing addThing={this.addThingTo('inputs')} options={options} />
 
           </Column>
 
@@ -73,13 +75,13 @@ class IpoModule extends Component {
               name="processDescription"
               value={processDescription}
               readOnly={false}
-              onChange={this.handleInputChange} />
+              onChange={this.handleTextInputChange} />
           </Column>
 
           <Column>
             <Header><FontAwesomeIcon icon={faSignOutAlt} /> OUTPUTS</Header>
-            {this.renderThings(outputs)}
-            <AddThing addThing={(input) => this.addThing(input, 'outputs')} options={[{ key: 'Sample', name: 'Sample' }]} />
+            {this.renderThingsOfModule(outputs)}
+            <AddThing addThing={this.addThingTo('outputs')} options={options} />
           </Column>
         </FlexBox>
       </div>
