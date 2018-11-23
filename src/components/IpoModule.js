@@ -12,25 +12,20 @@ class IpoModule extends Component {
 
   state = {
     title: '',
-    description: '',
+    slug: '',
+    moduleDescription: '',
     inputs: {},
-    process: '',
-    outputs: {}
+    outputs: {},
+    processDescription: "awdawd\n\n\nadwadwdaw"
   }
 
   componentDidMount() {
     this.setState({
       title: 'Freshly Ground Coffee',
-      description: 'How to get freshly ground coffee',
-      inputs: {
-        0: "Coffee Beans",
-        1: "Coffee Grinder"
-      },
-      process: 'Put Coffeebeans in Grinder and Grind!',
-      outputs: {
-        3: "Ground Coffee",
-        1: "Coffee Grinder"
-      }
+      moduleDescription: 'How to get freshly ground coffee',
+      inputs: {},
+      processDescription: 'Put Coffeebeans in Grinder and Grind!',
+      outputs: {}
     })
   }
 
@@ -42,32 +37,43 @@ class IpoModule extends Component {
     this.setState({ [target]: copy })
   }
 
+  handleInputChange = event => {
+    const { value, name } = event.target
+    this.setState({ [name]: value })
+  }
+
   render() {
 
-    const { title, description, inputs, process, outputs } = this.state
+    const { title, moduleDescription, inputs, processDescription, outputs } = this.state
 
     return (
       <div style={{ margin: 50, maxWidth: 900 }} >
 
         <Header><FontAwesomeIcon icon={faCube} /> Title:</Header>
-        <Content>{title}</Content>
+        <Input name="title" value={title} onChange={this.handleInputChange} />
         <Seperator />
 
         <Header><FontAwesomeIcon icon={faInfoCircle} /> Description:</Header>
-        <Content>{description}</Content>
+        <Input name="moduleDescription" value={moduleDescription} onChange={this.handleInputChange} />
         <Seperator />
 
         <FlexBox>
           <Column>
             <Header><FontAwesomeIcon icon={faSignInAlt} /> INPUTS</Header>
             {this.renderThings(inputs)}
+
             <AddThing addThing={(input) => this.addThing(input, 'inputs')} />
 
           </Column>
 
           <Column>
             <Header><FontAwesomeIcon icon={faMagic} /> PROCESS</Header>
-            <Process>{process}</Process>
+            <Process
+              id="processDescription"
+              name="processDescription"
+              value={processDescription}
+              readOnly={false}
+              onChange={this.handleInputChange} />
           </Column>
 
           <Column>
@@ -93,10 +99,12 @@ const FlexBox = styled.div`
   flex-wrap: wrap;
 `
 
-const Content = styled.div`
+const Input = styled.input`
+    all: unset;
     border-radius: 8px;
     border: 1px solid #BFD7EA;
     padding: 8px;
+    width: calc(100% - 2*8px);
 `
 
 const Header = styled.div`
@@ -105,8 +113,15 @@ const Header = styled.div`
   color: #EF476F;
 `
 
-const Process = styled.div`
+const Process = styled.textarea`
+  all: unset;
+  resize: vertical;
+  margin: 8px;
   padding: 8px;
+  border: 1px solid #BFD7EA;
+  border-radius: 8px;
+  width: calc(100% - 4*8px);
+  height: 150px;
 `
 
 const Column = styled.div`
