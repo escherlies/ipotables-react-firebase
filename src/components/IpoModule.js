@@ -3,7 +3,7 @@ import _ from 'lodash'
 import Thing from './Thing';
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSignInAlt, faSignOutAlt, faMagic, faInfoCircle, faCube, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faSignInAlt, faSignOutAlt, faMagic, faInfoCircle, faCube } from '@fortawesome/free-solid-svg-icons'
 import AddThing from './AddThing';
 import faker from 'faker'
 import ButtonColored from './ui/buttons/ButtonColored';
@@ -59,8 +59,9 @@ class IpoModule extends Component {
     const addReference = (targetPath, target) => _.forEach(_.get(this.state, target), (value, key) => _.set(updates, `things/${key}/${targetPath}/${moduleKey}`, true))
     _.forEach(targetPath, addReference)
 
-
     firebaseApp.database().ref().update(updates)
+      .then(window.confirm('Done!') && this.props.goBack())
+      .catch(e => window.alert(e))
   }
 
   render() {
@@ -74,7 +75,7 @@ class IpoModule extends Component {
 
 
     return (
-      <div style={{ margin: 50, maxWidth: 900 }} >
+      <div>
 
         <Header><FontAwesomeIcon icon={faCube} /> Title:</Header>
         <Input name="title" value={title} onChange={this.handleTextInputChange} readOnly={readOnly} />
@@ -157,7 +158,8 @@ const Header = styled.div`
 const Process = styled.textarea`
   all: unset;
   resize: vertical;
-  margin: 8px;
+  margin-left: 8px;
+  margin-right: 8px;
   padding: 8px;
   border: 1px solid #BFD7EA;
   border-radius: 8px;

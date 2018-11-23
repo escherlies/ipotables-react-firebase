@@ -4,23 +4,22 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 
-class IpoModulesList extends Component {
+class ThingsList extends Component {
 
   state = {}
 
   render() {
-    const { modules } = this.props
+    const { things } = this.props
 
     return (
       <div style={{}} >
-        <h2>Modules</h2>
+        <h2>Things</h2>
         {
-          _.map(modules, (module, moduleKey) => (
-            <Div key={moduleKey}>
-              <Link to={`/modules/${moduleKey}`}>
+          _.map(things, (thing, thingKey) => (
+            <Div key={thingKey}>
+              <Link to={`/things/${thingKey}`}>
                 <div style={{ padding: 8 }}>
-                  <Title>{module.title}</Title>
-                  <Description>{module.moduleDescription}</Description>
+                  <Title>{thing.name}</Title>
                 </div>
               </Link>
             </Div>
@@ -31,7 +30,7 @@ class IpoModulesList extends Component {
   }
 }
 
-export default IpoModulesList
+export default ThingsList
 
 
 const Div = styled.div`

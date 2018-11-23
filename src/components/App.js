@@ -6,7 +6,8 @@ import { BrowserRouter, Route, Switch, Link } from 'react-router-dom'
 import IpoModulesList from './IpoModulesList';
 import ButtonColored from './ui/buttons/ButtonColored';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faCube, faBox, faPuzzlePiece, faLemon } from '@fortawesome/free-solid-svg-icons';
+import ThingsList from './ThingsList';
 
 class App extends Component {
 
@@ -26,20 +27,21 @@ class App extends Component {
 
     return (
       <BrowserRouter>
-        <div className="App" style={{ padding: 8 }}>
-          <div>IPO Tables!</div>
+        <div className="App" style={{ padding: 8, maxWidth: 800 }}>
 
           <Route path='/:nav' component={BackButton} />
 
+          <h1>IPO Tables!</h1>
 
           <Route exact path='/' component={Home} />
 
 
           <Route exact path='/modules' render={() => <IpoModulesList modules={modules} readOnly={true} />} />
+          <Route exact path='/things' render={() => <ThingsList things={things} readOnly={true} />} />
 
           <Switch>
-            <Route exact path='/modules/add-new-module' render={() => <IpoModule things={things} />} />
-            <Route exact path='/modules/:moduleKey/edit' render={({ match, history }) => <IpoModule moduleKey={match.params.moduleKey} things={things} module={_.get(modules, match.params.moduleKey)} />} />
+            <Route exact path='/modules/add-new-module' render={({ history }) => <IpoModule things={things} goBack={() => history.push('/modules')} />} />
+            <Route exact path='/modules/:moduleKey/edit' render={({ match, history }) => <IpoModule moduleKey={match.params.moduleKey} things={things} module={_.get(modules, match.params.moduleKey)} goBack={() => history.push('/modules')} />} />
             <Route exact path='/modules/:moduleKey' render={({ match, history }) => <IpoModule moduleKey={match.params.moduleKey} things={things} readOnly={true} module={_.get(modules, match.params.moduleKey)} navigateToModule={() => history.push(`/modules/${match.params.moduleKey}/edit`)} />} />
           </Switch>
 
@@ -54,9 +56,20 @@ export default App;
 
 
 const Home = props => (<div>
-  <Link to='/modules'>
-    <ButtonColored title={'Modules List'} />
-  </Link>
+
+  <div>View:</div>
+  <div style={{
+    display: 'flex',
+    flexDirection: 'row',
+    maxWidth: 300
+  }}>
+    <Link to='/modules' style={{ flex: 1, margin: 5 }}>
+      <ButtonColored title={'Modules'} icon={<FontAwesomeIcon icon={faCube} />} />
+    </Link>
+    <Link to='/things' style={{ flex: 1, margin: 5 }}>
+      <ButtonColored title={'Things'} icon={<FontAwesomeIcon icon={faLemon} />} />
+    </Link>
+  </div>
 </div>)
 
 

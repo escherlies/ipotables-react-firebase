@@ -34,6 +34,10 @@ const Div = styled.div`
     border: 1px solid #BFD7EA;
   }
 
+  &:only-child {
+    border-radius: 8px;
+  }
+
   &:hover {
     cursor: pointer;
     background: #BFD7EA;
