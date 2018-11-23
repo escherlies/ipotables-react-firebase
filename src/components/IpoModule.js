@@ -4,28 +4,29 @@ import Thing from './Thing';
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSignInAlt, faSignOutAlt, faMagic, faInfoCircle, faCube, faPlus } from '@fortawesome/free-solid-svg-icons'
-import LabeledTextInput from './ui/LabeledTextInput';
 import AddThing from './AddThing';
+import faker from 'faker'
+import ButtonColored from './ui/buttons/ButtonColored';
+import firebaseApp from '../functions/firebaseApp';
 
 
 class IpoModule extends Component {
 
-  state = {
+  state = this.props.module || {
     title: '',
-    slug: '',
     moduleDescription: '',
     inputs: {},
     outputs: {},
-    processDescription: "awdawd\n\n\nadwadwdaw"
+    processDescription: ''
   }
 
-  componentDidMount() {
-    this.setState({
-      title: 'Freshly Ground Coffee',
-      moduleDescription: 'How to get freshly ground coffee',
-      inputs: {},
-      processDescription: 'Put Coffeebeans in Grinder and Grind!',
-      outputs: {}
+  componentWillReceiveProps(nextProps) {
+    if (process.env.NODE_ENV === 'development' && !this.props.module) this.setState({
+      title: faker.lorem.words(_.random(1, 5)),
+      moduleDescription: `How to ${faker.lorem.sentence(3)}`,
+      processDescription: faker.lorem.paragraphs(2),
+      inputs: { [_.sample(_.keys(nextProps.things))]: true },
+      outputs: { [_.sample(_.keys(nextProps.things))]: true }
     })
   }
 
@@ -42,21 +43,45 @@ class IpoModule extends Component {
     this.setState({ [name]: value })
   }
 
+  createModule = () => {
+
+    const updates = {}
+
+    // module
+    const moduleKey = this.props.moduleKey || firebaseApp.database().ref().push().key
+    updates[`modules/${moduleKey}`] = this.state // state represents modules object structure
+
+    // add module reference to things
+    const targetPath = {
+      inputs: 'inputOf',
+      outputs: 'outputOf',
+    }
+    const addReference = (targetPath, target) => _.forEach(_.get(this.state, target), (value, key) => _.set(updates, `things/${key}/${targetPath}/${moduleKey}`, true))
+    _.forEach(targetPath, addReference)
+
+
+    firebaseApp.database().ref().update(updates)
+  }
+
   render() {
 
     const { title, moduleDescription, inputs, processDescription, outputs } = this.state
-    const { things, modules } = this.props
+    const { things, readOnly } = this.props
+
     const options = _.map(things, (thing, key) => ({ key, ...thing }))
+
+    console.log(`this.state.inputs`, this.state.inputs)
+
 
     return (
       <div style={{ margin: 50, maxWidth: 900 }} >
 
         <Header><FontAwesomeIcon icon={faCube} /> Title:</Header>
-        <Input name="title" value={title} onChange={this.handleTextInputChange} />
+        <Input name="title" value={title} onChange={this.handleTextInputChange} readOnly={readOnly} />
         <Seperator />
 
         <Header><FontAwesomeIcon icon={faInfoCircle} /> Description:</Header>
-        <Input name="moduleDescription" value={moduleDescription} onChange={this.handleTextInputChange} />
+        <Input name="moduleDescription" value={moduleDescription} onChange={this.handleTextInputChange} readOnly={readOnly} />
         <Seperator />
 
         <FlexBox>
@@ -64,7 +89,10 @@ class IpoModule extends Component {
             <Header><FontAwesomeIcon icon={faSignInAlt} /> INPUTS</Header>
             {this.renderThingsOfModule(inputs)}
 
-            <AddThing addThing={this.addThingTo('inputs')} options={options} />
+            {
+              !readOnly &&
+              <AddThing addThing={this.addThingTo('inputs')} options={options} />
+            }
 
           </Column>
 
@@ -74,16 +102,27 @@ class IpoModule extends Component {
               id="processDescription"
               name="processDescription"
               value={processDescription}
-              readOnly={false}
+              readOnly={readOnly}
               onChange={this.handleTextInputChange} />
           </Column>
 
           <Column>
             <Header><FontAwesomeIcon icon={faSignOutAlt} /> OUTPUTS</Header>
             {this.renderThingsOfModule(outputs)}
-            <AddThing addThing={this.addThingTo('outputs')} options={options} />
+            {
+              !readOnly &&
+              <AddThing addThing={this.addThingTo('outputs')} options={options} />
+            }
           </Column>
         </FlexBox>
+        <Seperator />
+        <Seperator />
+        {
+          readOnly ?
+            <ButtonColored icon={<FontAwesomeIcon icon={faCube} />} title='Edit Module' color='default' onClick={this.props.navigateToModule}></ButtonColored> :
+            <ButtonColored icon={<FontAwesomeIcon icon={faCube} />} title='Create Module' color='default' onClick={this.createModule}></ButtonColored>
+
+        }
       </div>
     )
   }
@@ -92,7 +131,7 @@ class IpoModule extends Component {
 export default IpoModule
 
 const Seperator = styled.div`
-  height: ${props => `${props.height}px` || 18}
+  height: ${props => `${props.height}px` || 18};
 `
 
 const FlexBox = styled.div`

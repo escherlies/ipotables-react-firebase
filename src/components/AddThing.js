@@ -8,6 +8,7 @@ import slugify from 'slugify';
 import firebaseApp from '../functions/firebaseApp'
 import PropTypes from 'prop-types'
 
+
 class AddThing extends Component {
 
   state = {
@@ -44,6 +45,9 @@ class AddThing extends Component {
   }
 
   handleSubmit = () => {
+    
+    if (!this.state.selectedOption) return null
+
     const { key, name, isNewOption } = this.state.selectedOption
 
     // update firebase
@@ -62,8 +66,10 @@ class AddThing extends Component {
     const { options } = this.props
 
     return (
-      <div>
-        <Seperator height={15} />
+      <Container>
+        <Seperator height={5} />
+        <div>Add new thing to the list:</div>
+        <Seperator height={5} />
         <Creatable
           options={options}
           getOptionLabel={option => this.getOptionValueAndLabel(option).label}
@@ -76,7 +82,7 @@ class AddThing extends Component {
         />
         <Seperator height={5} />
         <ButtonColored title='Add Thing' color='yellow' icon={<FontAwesomeIcon icon={faPlus} />} onClick={this.handleSubmit} />
-      </div>
+      </Container>
     )
   }
 }
@@ -95,5 +101,12 @@ AddThing.propTypes = {
 
 
 const Seperator = styled.div`
-  height: ${props => `${props.height}px` || 18}
-        `
+  height: ${props => `${props.height}px` || 18};
+`
+
+const Container = styled.div`
+  background: #F6F6F6;
+  border-radius: 8px;
+  padding: 8px;
+  margin-top: 15px;
+`
