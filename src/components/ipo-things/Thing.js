@@ -3,7 +3,7 @@ import _ from 'lodash'
 import ListItem from '../ListItem';
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSignInAlt, faSignOutAlt, faMagic, faInfoCircle, faCube } from '@fortawesome/free-solid-svg-icons'
+import { faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 
 
 class Thing extends Component {

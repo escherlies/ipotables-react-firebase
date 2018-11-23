@@ -58,7 +58,3 @@ const Div = styled.div`
 const Title = styled.div`
     font-size: 1.2rem;
 `
-
-const Description = styled.div`
-    font-size: 0.9rem;
-`
