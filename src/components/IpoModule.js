@@ -26,7 +26,7 @@ class IpoModule extends Component {
         0: "Coffee Beans",
         1: "Coffee Grinder"
       },
-      process: 'Put COffeebeans in Grinder and Grind!',
+      process: 'Put Coffeebeans in Grinder and Grind!',
       outputs: {
         3: "Ground Coffee",
         1: "Coffee Grinder"
