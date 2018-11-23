@@ -2,26 +2,11 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import LabeledTextInput from './ui/LabeledTextInput';
 import ButtonColored from './ui/buttons/ButtonColored'
-import Select from 'react-select'
 import Creatable from 'react-select/lib/Creatable';
-import _ from 'lodash'
 import slugify from 'slugify';
 import firebaseApp from '../functions/firebaseApp'
-
-// const options = [
-//   { value: 'chocolate', label: 'Chocolate' },
-//   { value: 'strawberry', label: 'Strawberry' },
-//   { value: 'vanilla', label: 'Vanilla' }
-// ]
-
-const options = [
-  { key: 'key-1', name: 'Chocolate' },
-  { key: 'key-2', name: 'Strawberry' },
-  { key: 'key-3', name: 'Vanilla' },
-]
-
+import PropTypes from 'prop-types'
 
 class AddThing extends Component {
 
@@ -66,14 +51,19 @@ class AddThing extends Component {
 
     // send selected data to parent component
     this.props.addThing(key)
+
+    this.setState({ selectedOption: null })
   }
 
 
   render() {
     console.log(`this.state.value`, this.state.selectedOption)
 
+    const { options } = this.props
+
     return (
       <div>
+        <Seperator height={15} />
         <Creatable
           options={options}
           getOptionLabel={option => this.getOptionValueAndLabel(option).label}
@@ -81,6 +71,7 @@ class AddThing extends Component {
           getNewOptionData={this.getNewOptionData}
           isValidNewOption={this.isValidNewOption}
           isClearable
+          value={this.state.selectedOption}
           onChange={(selectedOption, action) => this.setState({ selectedOption })}
         />
         <Seperator height={5} />
@@ -91,6 +82,16 @@ class AddThing extends Component {
 }
 
 export default AddThing
+
+
+AddThing.propTypes = {
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      key: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    }).isRequired
+  )
+}
 
 
 const Seperator = styled.div`

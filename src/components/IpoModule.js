@@ -79,7 +79,7 @@ class IpoModule extends Component {
           <Column>
             <Header><FontAwesomeIcon icon={faSignOutAlt} /> OUTPUTS</Header>
             {this.renderThings(outputs)}
-            <AddThing addThing={(input) => this.addThing(input, 'outputs')} />
+            <AddThing addThing={(input) => this.addThing(input, 'outputs')} options={[{ key: 'Sample', name: 'Sample' }]} />
           </Column>
         </FlexBox>
       </div>
