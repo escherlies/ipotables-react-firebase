@@ -12,7 +12,7 @@ const NavHeader = props => (<Route path='/' render={() => (<div style={{
   flexWrap: 'wrap',
   minHeight: 100,
   background: '#F1f1f1',
-  padding: 8,
+  padding: 15,
 }}>
   <div style={{
     flex: 1,
