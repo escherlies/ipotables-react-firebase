@@ -4,7 +4,7 @@ const Input = styled.input`
     font-size: 14px;
     height: 36px;
     color: #292929;
-    background-color: #E0FF4F;
+    background-color: #CFD9DE;
     border-radius: 8px;
     border: none;
     padding: 8px;
@@ -19,7 +19,6 @@ const Input = styled.input`
     `}
     &:focus {
       outline: none;
-    background-color: #E0FF4F;
     }
 `
 

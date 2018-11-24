@@ -152,7 +152,7 @@ const FlexBox = styled.div`
 const Input = styled.input`
     all: unset;
     border-radius: 8px;
-    border: 1px solid #BFD7EA;
+    border: 1px solid #00B2D2;
     padding: 8px;
     width: calc(100% - 2*8px);
     &:disabled {
@@ -163,7 +163,7 @@ const Input = styled.input`
 const Header = styled.div`
   padding: 8px;
   font-size: 1.2em;
-  color: #EF476F;
+  color: #EA526F;
 `
 
 const Process = styled.textarea`
@@ -175,7 +175,7 @@ const Process = styled.textarea`
   margin-left: 8px;
   margin-right: 8px;
   padding: 8px;
-  border: 1px solid #BFD7EA;
+  border: 1px solid #00B2D2;
   border-radius: 8px;
   width: calc(100% - 4*8px);
   height: 150px;

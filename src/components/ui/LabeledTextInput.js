@@ -21,7 +21,7 @@ const LabeledTextInput = props => {
 
   return <div style={styles.itemView}>
     <Label>{props.label}</Label>
-    <div style={{ background: '#B8D141', paddingBottom: 3, borderRadius: 8 }}>
+    <div style={{ background: '#BCCAD1', paddingBottom: 3, borderRadius: 8 }}>
       <Input
         value={value}
         onChange={handleChange}

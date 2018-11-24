@@ -26,7 +26,7 @@ const Home = props => {
     }}>
       <LabeledTextInput label='What do you want to document?' field='get-started-input' context={props.context} />
       <div style={{ width: 75 }}>
-        <ButtonColored icon={<FontAwesomeIcon icon={faCheck} />} color='green' onClick={() => props.createNewModule(inputValue)} />
+        <ButtonColored icon={<FontAwesomeIcon icon={faCheck} />} color='blue' onClick={() => props.createNewModule(inputValue)} />
       </div>
     </div>
     <div style={{ marginTop: 15 }}>
@@ -40,10 +40,10 @@ const Home = props => {
       flexDirection: 'row',
     }}>
       <Link to='/modules' style={{ flex: 1, margin: 5 }}>
-        <ButtonColored title={'Modules'} icon={<FontAwesomeIcon icon={faCube} />} />
+        <ButtonColored title={'Modules'} color='blue' icon={<FontAwesomeIcon icon={faCube} />} />
       </Link>
       <Link to='/things' style={{ flex: 1, margin: 5 }}>
-        <ButtonColored title={'Things'} icon={<FontAwesomeIcon icon={faLemon} />} />
+        <ButtonColored title={'Things'} color='blue' icon={<FontAwesomeIcon icon={faLemon} />} />
       </Link>
     </div>
   </div>)
