@@ -13,13 +13,17 @@ export default styled.div`
       background: #00B2D2;
     }
     
+    
     &:first-of-type {
       border-width: 1px 1px 1px 1px;
       border-radius: 8px 8px 0px 0px;
     }
-
+    
     &:last-of-type {
       border-radius: 0px 0px 8px 8px;
     }
-
+    
+    &:only-of-type {
+      border-radius: 8px;
+    }
 `

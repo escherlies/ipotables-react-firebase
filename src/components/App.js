@@ -25,11 +25,11 @@ class App extends Component {
 
     return (
       <BrowserRouter>
-        <div className="App" style={{ maxWidth: 800 }}>
+        <div className="App" >
 
           <NavHeader />
 
-          <div style={{ padding: 15 }}>
+          <div style={{ padding: 15, maxWidth: 768, margin: 'auto'}}>
 
             <Route exact path='/' render={({ history }) => <Home modules={modules} context={this} createNewModule={title => history.push(`/modules/add-new-module/${title}`)} />} />
 
