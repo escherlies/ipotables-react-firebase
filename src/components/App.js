@@ -2,15 +2,12 @@ import React, { Component } from 'react';
 import base from '../functions/base';
 import _ from 'lodash'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft, faHockeyPuck, faHome } from '@fortawesome/free-solid-svg-icons';
 import IpoModulesList from './ipo-modules/IpoModulesList';
-import ButtonColored from './ui/buttons/ButtonColored';
 import IpoModule from './ipo-modules/IpoModule';
 import ThingsList from './ipo-things/ThingsList';
 import Thing from './ipo-things/Thing';
 import Home from './Home';
-import Logo from '../assets/logo.png'
+import NavHeader from './header/NavHeader';
 
 class App extends Component {
 
@@ -28,22 +25,12 @@ class App extends Component {
 
     return (
       <BrowserRouter>
-        <div className="App" style={{ padding: 8, maxWidth: 800 }}>
+        <div className="App" style={{ maxWidth: 800 }}>
 
-          <Route path='/' render={() => <img src={Logo} alt="ipo logo" style={{ height: 75, objectFit: 'contain' }} />} />
 
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'flex-start',
-            alignItems: 'center',
-          }}>
 
-            <Route path='/:nav' component={HomeButton} />
-            <Route path='/:nav/:nav' component={BackButton} />
-          </div>
+          <NavHeader />
 
-          <h1>IPO Tables</h1>
 
           <Route exact path='/' render={({ history }) => <Home modules={modules} context={this} createNewModule={title => history.push(`/modules/add-new-module/${title}`)} />} />
 
@@ -71,21 +58,3 @@ export default App;
 
 
 
-const HomeButton = props => <div style={{ width: 120, margin: 5 }}>
-  <ButtonColored
-    title='Home'
-    color='blue'
-    icon={<FontAwesomeIcon icon={faHome} />}
-    onClick={() => { props.history.push('/') }}></ButtonColored>
-</div>
-
-const BackButton = props => <div style={{ width: 120, margin: 5 }}>
-  <ButtonColored
-    title='Back'
-    icon={<FontAwesomeIcon icon={faArrowLeft} />}
-    onClick={() => {
-      const path = props.location.pathname.split('/')
-      path.pop()
-      props.history.push(path.join('/'))
-    }}></ButtonColored>
-</div>
