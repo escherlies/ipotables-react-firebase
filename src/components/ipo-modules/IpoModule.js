@@ -12,7 +12,7 @@ import firebaseApp from '../../functions/firebaseApp';
 
 class IpoModule extends Component {
 
-  state = this.props.module || {
+  state = {
     title: '',
     moduleDescription: '',
     inputs: {},
@@ -20,8 +20,12 @@ class IpoModule extends Component {
     processDescription: ''
   }
 
+  componentDidMount() {
+    this.props.module && this.setState({ ...this.props.module })
+  }
+
   componentWillReceiveProps(nextProps) {
-    if (process.env.NODE_ENV === 'development' && !this.props.module) this.setState({
+    if (false && process.env.NODE_ENV === 'development' && !this.props.module) this.setState({
       title: faker.lorem.words(_.random(1, 5)),
       moduleDescription: `How to ${faker.lorem.sentence(3)}`,
       processDescription: faker.lorem.paragraphs(2),
@@ -70,9 +74,6 @@ class IpoModule extends Component {
     const { things, readOnly } = this.props
 
     const options = _.map(things, (thing, key) => ({ key, ...thing }))
-
-    console.log(`this.state.inputs`, this.state.inputs)
-
 
     return (
       <div>

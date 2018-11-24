@@ -17,7 +17,6 @@ class Thing extends Component {
     const { thing, modules } = this.props
 
     if (!thing) return null
-    console.log(`thing`, thing)
 
     return (
       <div>

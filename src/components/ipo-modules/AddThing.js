@@ -9,6 +9,7 @@ import firebaseApp from '../../functions/firebaseApp'
 import PropTypes from 'prop-types'
 
 
+
 class AddThing extends Component {
 
   state = {
@@ -45,7 +46,7 @@ class AddThing extends Component {
   }
 
   handleSubmit = () => {
-    
+
     if (!this.state.selectedOption) return null
 
     const { key, name, isNewOption } = this.state.selectedOption
@@ -61,7 +62,6 @@ class AddThing extends Component {
 
 
   render() {
-    console.log(`this.state.value`, this.state.selectedOption)
 
     const { options } = this.props
 
@@ -87,8 +87,6 @@ class AddThing extends Component {
   }
 }
 
-export default AddThing
-
 
 AddThing.propTypes = {
   options: PropTypes.arrayOf(
@@ -99,6 +97,8 @@ AddThing.propTypes = {
   )
 }
 
+
+export default AddThing
 
 const Seperator = styled.div`
   height: ${props => `${props.height}px` || 18};
