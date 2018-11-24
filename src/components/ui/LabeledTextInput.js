@@ -21,15 +21,17 @@ const LabeledTextInput = props => {
 
   return <div style={styles.itemView}>
     <Label>{props.label}</Label>
-    <Input
-      value={value}
-      onChange={handleChange}
-      type={type}
-      error={error}
-      disabled={disabled}
-    />    {
-      error && <Error>{error}</Error>
-    }
+    <div style={{ background: '#B8D141', paddingBottom: 3, borderRadius: 8 }}>
+      <Input
+        value={value}
+        onChange={handleChange}
+        type={type}
+        error={error}
+        disabled={disabled}
+      />    {
+        error && <Error>{error}</Error>
+      }
+    </div>
   </div>
 }
 

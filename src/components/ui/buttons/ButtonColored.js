@@ -22,10 +22,18 @@ const ButtonColored = props => {
 
   return (
     <ButtonRaw position={props.position} onClick={props.onClick} backgroundColor={colors[0]} edgeColor={colors[1]} >
-      <div style={{ fontSize: 20, fontWeight: 'bold', color: colors[2] }}>
+      <div style={{
+        fontSize: 20, fontWeight: 'bold', color: colors[2], display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
         {typeof props.icon === 'string' && <FontAwesomeIcon icon={props.icon} />}
         {typeof props.icon === 'object' && props.icon}
-        <span style={{ paddingLeft: props.icon ? 12 : 0, }}>{props.title}</span>
+        {
+          props.title &&
+          <span style={{ paddingLeft: props.icon ? 12 : 0, }}>{props.title}</span>
+        }
       </div>
     </ButtonRaw>
   )

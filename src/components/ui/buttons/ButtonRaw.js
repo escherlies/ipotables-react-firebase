@@ -40,10 +40,10 @@ export const ButtonRaw = props => {
 
   return (
     <Hover isActive={props.isActive} >
-      <div style={{ width: '100%', height: 36, }} onClick={props.onClick} >
-        <div style={{ height: '100%', ...border, ...edge }}>
-          <div style={{ height: '100%', ...border, backgroundColor: props.backgroundColor }}>
-            <div style={{ display: 'flex', flexDirection: 'row', height: '100%', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 20 }}>
+      <div style={{ width: '100%'}} onClick={props.onClick} >
+        <div style={{ ...border, ...edge }}>
+          <div style={{ ...border, backgroundColor: props.backgroundColor }}>
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', height: 36 }}>
               {props.children}
             </div>
           </div>

@@ -23,18 +23,18 @@ class Thing extends Component {
         <h2>{thing.name}</h2>
         <FlexBox >
           <Column>
-            <Header><FontAwesomeIcon icon={faSignOutAlt} /> Result of</Header>
-            <div>
-              {
-                this.renderNodes(thing.outputOf, modules)
-              }
-            </div>
-          </Column>
-          <Column>
             <Header><FontAwesomeIcon icon={faSignInAlt} /> Ingredient to</Header>
             <div>
               {
                 this.renderNodes(thing.inputOf, modules)
+              }
+            </div>
+          </Column>
+          <Column>
+            <Header><FontAwesomeIcon icon={faSignOutAlt} /> Result of</Header>
+            <div>
+              {
+                this.renderNodes(thing.outputOf, modules)
               }
             </div>
           </Column>

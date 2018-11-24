@@ -30,7 +30,7 @@ const Home = props => {
       </div>
     </div>
     <div style={{ marginTop: 15 }}>
-      {!_.isEmpty(selectedModules) && <div>{'👀'} Found these modules in the database:</div>}
+      {!_.isEmpty(selectedModules) && <span>{'👀'} Found these modules in the database:</span>}
       {_.map(selectedModules, (module) => <ListItem key={module.key} title={module.title} linkTo={`modules/${module.key}`} />)}
     </div>
 
