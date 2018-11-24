@@ -38,7 +38,8 @@ const Div = styled.div`
 
     border: 1px solid #BFD7EA;
     border-width: 0px 1px 1px 1px;
-    
+    background: #F6F6F6;
+
     cursor: pointer;
     
     &:hover {

@@ -25,6 +25,8 @@ class IpoModule extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    nextProps.module && this.setState({ ...nextProps.module })
+
     if (false && process.env.NODE_ENV === 'development' && !this.props.module) this.setState({
       title: faker.lorem.words(_.random(1, 5)),
       moduleDescription: `How to ${faker.lorem.sentence(3)}`,
@@ -79,11 +81,11 @@ class IpoModule extends Component {
       <div>
 
         <Header><FontAwesomeIcon icon={faCube} /> Title:</Header>
-        <Input name="title" value={title} onChange={this.handleTextInputChange} readOnly={readOnly} />
+        <Input name="title" value={title} onChange={this.handleTextInputChange} disabled={readOnly} />
         <Seperator />
 
         <Header><FontAwesomeIcon icon={faInfoCircle} /> Description:</Header>
-        <Input name="moduleDescription" value={moduleDescription} onChange={this.handleTextInputChange} readOnly={readOnly} />
+        <Input name="moduleDescription" value={moduleDescription} onChange={this.handleTextInputChange} disabled={readOnly} />
         <Seperator />
 
         <FlexBox>
@@ -104,7 +106,7 @@ class IpoModule extends Component {
               id="processDescription"
               name="processDescription"
               value={processDescription}
-              readOnly={readOnly}
+              disabled={readOnly}
               onChange={this.handleTextInputChange} />
           </Column>
 
@@ -119,12 +121,14 @@ class IpoModule extends Component {
         </FlexBox>
         <Seperator />
         <Seperator />
-        {
-          readOnly ?
-            <ButtonColored icon={<FontAwesomeIcon icon={faCube} />} title='Edit Module' color='default' onClick={this.props.navigateToModule}></ButtonColored> :
-            <ButtonColored icon={<FontAwesomeIcon icon={faCube} />} title='Create Module' color='default' onClick={this.createModule}></ButtonColored>
+        <div style={{ marginTop: 30 }}>
+          {
+            readOnly ?
+              <ButtonColored icon={<FontAwesomeIcon icon={faCube} />} title='Edit Module' color='default' onClick={this.props.navigateToModule}></ButtonColored> :
+              <ButtonColored icon={<FontAwesomeIcon icon={faCube} />} title='Create Module' color='default' onClick={this.createModule}></ButtonColored>
 
-        }
+          }
+        </div>
       </div>
     )
   }
@@ -140,6 +144,9 @@ const FlexBox = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  @media (max-width: 425px) {
+    flex-direction: column;
+  }
 `
 
 const Input = styled.input`
@@ -148,6 +155,9 @@ const Input = styled.input`
     border: 1px solid #BFD7EA;
     padding: 8px;
     width: calc(100% - 2*8px);
+    &:disabled {
+      background: #F6F6F6;
+    }
 `
 
 const Header = styled.div`
@@ -157,7 +167,10 @@ const Header = styled.div`
 `
 
 const Process = styled.textarea`
-  all: unset;
+  /* all: unset; */
+  font-size: unset;
+  font-family: unset;
+  color: unset;
   resize: vertical;
   margin-left: 8px;
   margin-right: 8px;
@@ -166,10 +179,13 @@ const Process = styled.textarea`
   border-radius: 8px;
   width: calc(100% - 4*8px);
   height: 150px;
+
+  &:disabled {
+    background: #F6F6F6;
+  }
 `
 
 const Column = styled.div`
   margin-top: 12px;
   flex: 1;
-  min-width: 200px;
 `

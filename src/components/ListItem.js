@@ -28,6 +28,7 @@ const Div = styled.div`
   border-style: solid;
   border-color: #BFD7EA;
   border-width: 1px 1px 0px 1px;
+  background: #F6F6F6;
 
   &:first-of-type {
     border-radius: 8px 8px 0px 0px;
