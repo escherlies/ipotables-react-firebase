@@ -36,7 +36,14 @@ class IpoModule extends Component {
     })
   }
 
-  renderThingsOfModule = things => <div>{_.map(things, (thing, key) => <ListItem key={key} title={_.get(this.props.things, `${key}.name`)} linkTo={`/things/${key}`} />)}</div>
+  renderThingsOfModule = things => target => <div>{_.map(things, (thing, key) => <ListItem key={key} title={_.get(this.props.things, `${key}.name`)} delete={!this.props.readOnly && (() => this.removeThingFromModuleFromTarget({ target, key }))} linkTo={`/things/${key}`} />)}</div>
+
+  removeThingFromModuleFromTarget = ({ target, key }) => {
+    console.log('----logging point---- ')
+    const copy = _.cloneDeep(this.state[target])
+    delete copy[key]
+    this.setState({ [target]: copy })
+  }
 
   addThingTo = (target) => (key) => {
     const copy = _.cloneDeep(this.state[target])
@@ -91,7 +98,7 @@ class IpoModule extends Component {
         <FlexBox>
           <Column>
             <Header><FontAwesomeIcon icon={faSignInAlt} /> INPUTS</Header>
-            {this.renderThingsOfModule(inputs)}
+            {this.renderThingsOfModule(inputs)('inputs')}
 
             {
               !readOnly &&
@@ -112,7 +119,7 @@ class IpoModule extends Component {
 
           <Column>
             <Header><FontAwesomeIcon icon={faSignOutAlt} /> OUTPUTS</Header>
-            {this.renderThingsOfModule(outputs)}
+            {this.renderThingsOfModule(outputs)('outputs')}
             {
               !readOnly &&
               <AddThing addThing={this.addThingTo('outputs')} options={options} />
