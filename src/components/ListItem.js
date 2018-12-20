@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components'
@@ -13,15 +11,15 @@ class ListItem extends Component {
 
     return (
       <div>
-          <Content style={{ padding: 0 }}>
-            {this.props.title}
-            {
-              this.props.delete &&
-              <div className="--display-on-hover" onClick={e => { e.preventDefault(); this.props.delete() }}>
-                <FontAwesomeIcon icon={faTimes} />
-              </div>
-            }
-          </Content>
+        <Content style={{ padding: 0 }}>
+          {this.props.title}
+          {
+            this.props.delete &&
+            <div className="--display-on-hover" onClick={e => { e.preventDefault(); this.props.delete() }} style={{ paddingRight: 5 }} >
+              <FontAwesomeIcon icon={faTimes} />
+            </div>
+          }
+        </Content>
       </div>
     )
   }

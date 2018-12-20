@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 export default function ListWithLinksAndTitle({ items, title, contentRenderer, linkConstructor }) {
 
-  return <div style={{ boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.15)" }}>
+  return <div style={{ borderRadius: 5, boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.15)" }}>
     <Title>{title}</Title>
     {
       _.map(items, (item, key) => (
@@ -24,13 +24,11 @@ export default function ListWithLinksAndTitle({ items, title, contentRenderer, l
 }
 
 
-/**
- * STYLES
- */
+// STYLED
 
 const Title = styled.div`
 
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   background: #026699;
   padding: 15px;
   border-radius: 5px 5px 0 0;

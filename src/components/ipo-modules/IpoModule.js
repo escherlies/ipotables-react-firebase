@@ -37,7 +37,7 @@ class IpoModule extends Component {
     })
   }
 
-  renderThingsOfModule = target => ( ___ , key) => {
+  renderThingsOfModule = target => (___, key) => {
 
     const thing = _.get(this.props, `things.${key}`)
     console.log(`thing`, thing)
@@ -99,13 +99,12 @@ class IpoModule extends Component {
     return (
       <div>
 
-        <Header><FontAwesomeIcon icon={faCube} /> Title:</Header>
-        <Input name="title" value={title} onChange={this.handleTextInputChange} disabled={readOnly} />
-        <Seperator />
-
-        <Header><FontAwesomeIcon icon={faInfoCircle} /> Description:</Header>
-        <Input name="moduleDescription" value={moduleDescription} onChange={this.handleTextInputChange} disabled={readOnly} />
-        <Seperator />
+        <TitledInputWrapper>
+          <ModuleTitle>
+            <FontAwesomeIcon icon={faCube} /><TitleInput name="title" value={title} onChange={this.handleTextInputChange} disabled={readOnly} />
+          </ModuleTitle>
+          <Input name="moduleDescription" value={moduleDescription} onChange={this.handleTextInputChange} disabled={readOnly} />
+        </TitledInputWrapper>
 
         <FlexBox>
           <Column>
@@ -124,13 +123,15 @@ class IpoModule extends Component {
           </Column>
 
           <Column>
-            <Header><FontAwesomeIcon icon={faMagic} /> PROCESS</Header>
-            <Process
-              id="processDescription"
-              name="processDescription"
-              value={processDescription}
-              disabled={readOnly}
-              onChange={this.handleTextInputChange} />
+            <TitledInputWrapper>
+              <Title><FontAwesomeIcon icon={faMagic} /> PROCESS</Title>
+              <Process
+                id="processDescription"
+                name="processDescription"
+                value={processDescription}
+                disabled={readOnly}
+                onChange={this.handleTextInputChange} />
+            </TitledInputWrapper>
           </Column>
 
           <Column>
@@ -146,8 +147,7 @@ class IpoModule extends Component {
             }
           </Column>
         </FlexBox>
-        <Seperator />
-        <Seperator />
+
         <div style={{ marginTop: 30 }}>
           {
             readOnly ?
@@ -175,44 +175,71 @@ const FlexBox = styled.div`
   }
 `
 
+const TitleInput = styled.input`
+    all: unset;
+    background: transparent;
+    width: 100%;
+    margin-left: 8px;
+`
+
 const Input = styled.input`
     all: unset;
     background: #F6F6F6;
-    border-radius: 8px;
-    padding: 8px;
+    border-radius: 0 0 8px 8px;
+    padding: 15px;
     /* border: 1px solid #d6d6d6; */
-    width: calc(100% - 2*8px);
+    width: calc(100% - 2*15px);
     &:disabled {
       border-bottom: 1px solid #d6d6d6;
     }
 `
 
-const Header = styled.div`
-  padding: 8px;
-  font-size: 1.2em;
-  color: #EA526F;
+const ModuleTitle = styled.div`
+  display: flex;
+  flex-direction: row;
+  font-size: 1.2rem;
+  background: #026699;
+  padding: 15px;
+  border-radius: 5px 5px 0 0;
+  font-weight: 600;
+  color: #F8F7F7;
 `
+
+const Title = styled.div`
+
+  font-size: 1.2rem;
+  background: #026699;
+  padding: 15px;
+  border-radius: 5px 5px 0 0;
+  font-weight: 600;
+  color: #F8F7F7;
+`
+
 
 const Process = styled.textarea`
   /* all: unset; */
   font-size: unset;
-  font-family: unset;
-  color: unset;
+  border: unset;
   resize: vertical;
-  margin-left: 8px;
-  margin-right: 8px;
-  padding: 8px;
-  border: 1px solid #00B2D2;
-  border-radius: 8px;
-  width: calc(100% - 4*8px);
-  height: 150px;
+  border-radius: 0 0 8px 8px;
+  padding: 15px;
+  width: calc(100% - 2*15px);
+  height: 155px;
+  background: #F9F8F8;
+  margin-bottom: -3px;
+  user-select: auto;
 
   &:disabled {
-    background: #F6F6F6;
+    background: #F9F8F8;
   }
 `
 
 const Column = styled.div`
-  margin-top: 12px;
+  margin: 12px 12px;
   flex: 1;
+`
+
+const TitledInputWrapper = styled.div`
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
 `
