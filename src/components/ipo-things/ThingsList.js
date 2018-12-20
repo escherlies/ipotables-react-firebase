@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
-import _ from 'lodash'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import ListItemDiv from '../ui/styled/ListItemDiv';
-
+import ListWithLinksAndTitle from '../ui/ListWithLinksAndTitle';
 
 class ThingsList extends Component {
 
@@ -12,30 +8,16 @@ class ThingsList extends Component {
   render() {
     const { things } = this.props
 
-    return (
-      <div style={{}} >
-        <h2>Things</h2>
-        {
-          _.map(things, (thing, thingKey) => (
-            <ListItemDiv key={thingKey}>
-              <Link to={`/things/${thingKey}`}>
-                <div style={{ padding: 8 }}>
-                  <Title>{thing.name}</Title>
-                </div>
-              </Link>
-            </ListItemDiv>
-          ))
-        }
-      </div>
-    )
+    const contentRenderer = thing => <div>{thing.name}</div>
+    const linkConstructor = key => `/things/${key}`
+
+    return <ListWithLinksAndTitle
+      items={things}
+      title="Things"
+      contentRenderer={contentRenderer}
+      linkConstructor={linkConstructor}
+    />
   }
 }
 
 export default ThingsList
-
-
-
-
-const Title = styled.div`
-    font-size: 1.2rem;
-`

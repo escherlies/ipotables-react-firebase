@@ -158,12 +158,13 @@ const FlexBox = styled.div`
 
 const Input = styled.input`
     all: unset;
+    background: #F6F6F6;
     border-radius: 8px;
-    border: 1px solid #00B2D2;
     padding: 8px;
+    /* border: 1px solid #d6d6d6; */
     width: calc(100% - 2*8px);
     &:disabled {
-      background: #F6F6F6;
+      border-bottom: 1px solid #d6d6d6;
     }
 `
 

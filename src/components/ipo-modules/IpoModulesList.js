@@ -1,43 +1,28 @@
 import React, { Component } from 'react'
-import _ from 'lodash'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import ListItemDiv from '../ui/styled/ListItemDiv';
+import ListWithLinksAndTitle from '../ui/ListWithLinksAndTitle';
 
-
-class IpoModulesList extends Component {
+class ThingsList extends Component {
 
   state = {}
+
+  contentRenderer = module =>
+    (<div>
+      <div>{module.title}</div>
+      <div style={{fontSize:  '0.8rem', paddingTop: 5}}>{module.moduleDescription}</div>
+    </div>)
 
   render() {
     const { modules } = this.props
 
-    return (
-      <div style={{}} >
-        <h2>Modules</h2>
-        {
-          _.map(modules, (module, moduleKey) => (
-            <ListItemDiv key={moduleKey}>
-              <Link to={`/modules/${moduleKey}`}>
-                <div style={{ padding: 8 }}>
-                  <Title>{module.title}</Title>
-                  <Description>{module.moduleDescription}</Description>
-                </div>
-              </Link>
-            </ListItemDiv>
-          ))
-        }
-      </div>
-    )
+    const linkConstructor = key => `/modules/${key}`
+
+    return <ListWithLinksAndTitle
+      items={modules}
+      title="Modules"
+      contentRenderer={this.contentRenderer}
+      linkConstructor={linkConstructor}
+    />
   }
 }
 
-export default IpoModulesList
-
-const Title = styled.div`
-    font-size: 1.2rem;
-`
-
-const Description = styled.div`
-    font-size: 0.9rem;
-`
+export default ThingsList

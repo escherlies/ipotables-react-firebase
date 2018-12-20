@@ -15,7 +15,7 @@ const Input = styled.input`
     ${props => props.error && css`border: 1px solid red;`}
     ${props => props.disabled && css`
       background: #FFFFFF;
-      border: 1px solid #EBEBEB;
+      border-bottom: 1px solid #d6d6d6;
     `}
     &:focus {
       outline: none;
