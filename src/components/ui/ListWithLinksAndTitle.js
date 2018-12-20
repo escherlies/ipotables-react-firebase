@@ -6,14 +6,14 @@ import styled from 'styled-components'
 
 export default function ListWithLinksAndTitle({ items, title, contentRenderer, linkConstructor }) {
 
-  return <div>
+  return <div style={{ boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.15)" }}>
     <Title>{title}</Title>
     {
       _.map(items, (item, key) => (
-        <ListItemDiv key={key}>
+        <ListItemDiv key={key} onMouseOver={e => console.log(`e`, e)}>
           <Link to={linkConstructor(key)}>
             <div>
-              {contentRenderer(item)}
+              {contentRenderer(item, key)}
             </div>
           </Link>
         </ListItemDiv>
@@ -24,13 +24,20 @@ export default function ListWithLinksAndTitle({ items, title, contentRenderer, l
 }
 
 
-
-
-
-
 /**
  * STYLES
  */
+
+const Title = styled.div`
+
+  font-size: 1.4rem;
+  background: #026699;
+  padding: 15px;
+  border-radius: 5px 5px 0 0;
+  font-weight: 600;
+  color: #F8F7F7;
+`
+
 
 
 const ListItemDiv = styled.div`
@@ -47,6 +54,10 @@ const ListItemDiv = styled.div`
   
   &:hover {
     background: #F1F0F0;
+    
+    & .--display-on-hover {
+      display: block;
+    }
   }
   
   
@@ -68,12 +79,3 @@ const ListItemDiv = styled.div`
   }
 `
 
-const Title = styled.div`
-
-  font-size: 1.4rem;
-  background: #026699;
-  padding: 15px;
-  border-radius: 5px 5px 0 0;
-  font-weight: 700;
-  color: #F8F7F7;
-`

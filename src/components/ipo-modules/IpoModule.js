@@ -8,6 +8,7 @@ import AddThing from './AddThing';
 import faker from 'faker'
 import ButtonColored from '../ui/buttons/ButtonColored';
 import firebaseApp from '../../functions/firebaseApp';
+import ListWithLinksAndTitle from '../ui/ListWithLinksAndTitle';
 
 
 class IpoModule extends Component {
@@ -36,7 +37,18 @@ class IpoModule extends Component {
     })
   }
 
-  renderThingsOfModule = things => target => <div>{_.map(things, (thing, key) => <ListItem key={key} title={_.get(this.props.things, `${key}.name`)} delete={!this.props.readOnly && (() => this.removeThingFromModuleFromTarget({ target, key }))} linkTo={`/things/${key}`} />)}</div>
+  renderThingsOfModule = target => ( ___ , key) => {
+
+    const thing = _.get(this.props, `things.${key}`)
+    console.log(`thing`, thing)
+    console.log(`key`, key)
+
+    return (<ListItem
+      key={key}
+      title={thing.name}
+      delete={!this.props.readOnly && (() => this.removeThingFromModuleFromTarget({ target, key }))}
+      linkTo={`/things/${key}`} />)
+  }
 
   removeThingFromModuleFromTarget = ({ target, key }) => {
     console.log('----logging point---- ')
@@ -97,8 +109,12 @@ class IpoModule extends Component {
 
         <FlexBox>
           <Column>
-            <Header><FontAwesomeIcon icon={faSignInAlt} /> INPUTS</Header>
-            {this.renderThingsOfModule(inputs)('inputs')}
+            <ListWithLinksAndTitle
+              items={inputs}
+              title={<div><FontAwesomeIcon icon={faSignInAlt} /><span style={{ paddingLeft: 8 }}>INPUTS</span></div>}
+              contentRenderer={this.renderThingsOfModule('inputs')}
+              linkConstructor={key => `/things/${key}`}
+            />
 
             {
               !readOnly &&
@@ -118,8 +134,12 @@ class IpoModule extends Component {
           </Column>
 
           <Column>
-            <Header><FontAwesomeIcon icon={faSignOutAlt} /> OUTPUTS</Header>
-            {this.renderThingsOfModule(outputs)('outputs')}
+            <ListWithLinksAndTitle
+              items={outputs}
+              title={<div><FontAwesomeIcon icon={faSignOutAlt} /><span style={{ paddingLeft: 8 }}>OUTPUTS</span></div>}
+              contentRenderer={this.renderThingsOfModule('outputs')}
+              linkConstructor={key => `/things/${key}`}
+            />
             {
               !readOnly &&
               <AddThing addThing={this.addThingTo('outputs')} options={options} />
@@ -133,7 +153,6 @@ class IpoModule extends Component {
             readOnly ?
               <ButtonColored icon={<FontAwesomeIcon icon={faCube} />} title='Edit Module' color='default' onClick={this.props.navigateToModule}></ButtonColored> :
               <ButtonColored icon={<FontAwesomeIcon icon={faCube} />} title='Create Module' color='default' onClick={this.createModule}></ButtonColored>
-
           }
         </div>
       </div>

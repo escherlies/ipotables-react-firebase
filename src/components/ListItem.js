@@ -13,17 +13,15 @@ class ListItem extends Component {
 
     return (
       <div>
-        <Link to={this.props.linkTo || ''} >
-          <Content style={{ padding: 12 }}>
+          <Content style={{ padding: 0 }}>
             {this.props.title}
             {
               this.props.delete &&
-              <div onClick={e => { e.preventDefault(); this.props.delete() }}>
+              <div className="--display-on-hover" onClick={e => { e.preventDefault(); this.props.delete() }}>
                 <FontAwesomeIcon icon={faTimes} />
               </div>
             }
           </Content>
-        </Link>
       </div>
     )
   }
@@ -38,14 +36,14 @@ const Content = styled.div`
     align-items: center;
 
     &:hover {
-      color: white;
+      /* color: white; */
     }
 
     & div {
       display: none;
     }
 
-    &:hover > div {
+    /* &:hover > div {
       display: block;
-    }
+    } */
 `
