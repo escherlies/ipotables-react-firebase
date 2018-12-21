@@ -40,8 +40,6 @@ class IpoModule extends Component {
   renderThingsOfModule = target => (___, key) => {
 
     const thing = _.get(this.props, `things.${key}`)
-    console.log(`thing`, thing)
-    console.log(`key`, key)
 
     return (<ListItem
       key={key}
@@ -51,7 +49,6 @@ class IpoModule extends Component {
   }
 
   removeThingFromModuleFromTarget = ({ target, key }) => {
-    console.log('----logging point---- ')
     const copy = _.cloneDeep(this.state[target])
     delete copy[key]
     this.setState({ [target]: copy })

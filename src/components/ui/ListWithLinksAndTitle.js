@@ -10,7 +10,7 @@ export default function ListWithLinksAndTitle({ items, title, contentRenderer, l
     <Title>{title}</Title>
     {
       _.map(items, (item, key) => (
-        <ListItemDiv key={key} onMouseOver={e => console.log(`e`, e)}>
+        <ListItemDiv key={key}>
           <Link to={linkConstructor(key)}>
             <div>
               {contentRenderer(item, key)}

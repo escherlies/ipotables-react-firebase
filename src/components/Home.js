@@ -14,8 +14,6 @@ const Home = props => {
   const modulesMap = _.map(props.modules, (module, key) => ({ key, ...module }))
   const selectedModules = inputValue && _.filter(modulesMap, (module, key) => module.title.toLowerCase().includes(inputValue.toLowerCase()))
 
-  console.log(`selectedModules`, selectedModules)
-
 
   return (<div styles={{ maxWidth: 400, }}>
     <h3>Get started</h3>
