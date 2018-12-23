@@ -1,11 +1,12 @@
 import React from 'react';
 import LabeledTextInput from './ui/LabeledTextInput'
-import { faCube, faLemon, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCube, faLemon, faCheck, faHandPointRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ButtonColored from './ui/buttons/ButtonColored';
 import _ from 'lodash'
 import ListItem from './ListItem';
+import ListWithLinksAndTitle from './ui/ListWithLinksAndTitle';
 
 
 const Home = props => {
@@ -28,8 +29,14 @@ const Home = props => {
       </div>
     </div>
     <div style={{ marginTop: 15 }}>
-      {!_.isEmpty(selectedModules) && <span>{'👀'} Found these modules in the database:</span>}
-      {_.map(selectedModules, (module) => <ListItem key={module.key} title={module.title} linkTo={`modules/${module.key}`} />)}
+      {!_.isEmpty(selectedModules) &&
+        <ListWithLinksAndTitle
+          items={selectedModules}
+          title={<div><FontAwesomeIcon icon={faHandPointRight} /><span style={{ paddingLeft: 8 }}>Found these modules in the database:</span></div>}
+          contentRenderer={(module) => <ListItem key={module.key} title={module.title} linkTo={`modules/${module.key}`} />}
+          linkConstructor={(item, key) => `/modules/${item.key}`}
+        />
+      }
     </div>
 
     <h3>View all existing</h3>

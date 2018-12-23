@@ -12,7 +12,7 @@ class ThingsList extends Component {
     const { things } = this.props
 
     const contentRenderer = thing => <div>{thing.name}</div>
-    const linkConstructor = key => `/things/${key}`
+    const linkConstructor = ( item, key ) => `/things/${key}`
 
     return <ListWithLinksAndTitle
       items={things}

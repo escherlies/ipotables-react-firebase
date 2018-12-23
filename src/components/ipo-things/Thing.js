@@ -31,7 +31,7 @@ class Thing extends Component {
               items={thing.inputOf}
               title={<div><FontAwesomeIcon icon={faSignInAlt} /><span style={{ paddingLeft: 8 }}>Ingredient to</span></div>}
               contentRenderer={this.renderNodes(modules)}
-              linkConstructor={key => `/modules/${key}`}
+              linkConstructor={(item, key) => `/modules/${key}`}
             />
           </Column>
           <Column>
@@ -39,7 +39,7 @@ class Thing extends Component {
               items={thing.outputOf}
               title={<div><FontAwesomeIcon icon={faSignOutAlt} /><span style={{ paddingLeft: 8 }}>Output of</span></div>}
               contentRenderer={this.renderNodes(modules)}
-              linkConstructor={key => `/modules/${key}`}
+              linkConstructor={(item, key) => `/modules/${key}`}
             />
           </Column>
         </FlexBox>

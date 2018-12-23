@@ -109,7 +109,7 @@ class IpoModule extends Component {
               items={inputs}
               title={<div><FontAwesomeIcon icon={faSignInAlt} /><span style={{ paddingLeft: 8 }}>INPUTS</span></div>}
               contentRenderer={this.renderThingsOfModule('inputs')}
-              linkConstructor={key => `/things/${key}`}
+              linkConstructor={(item, key) => `/things/${key}`}
             />
 
             {
@@ -136,7 +136,7 @@ class IpoModule extends Component {
               items={outputs}
               title={<div><FontAwesomeIcon icon={faSignOutAlt} /><span style={{ paddingLeft: 8 }}>OUTPUTS</span></div>}
               contentRenderer={this.renderThingsOfModule('outputs')}
-              linkConstructor={key => `/things/${key}`}
+              linkConstructor={(item, key) => `/things/${key}`}
             />
             {
               !readOnly &&

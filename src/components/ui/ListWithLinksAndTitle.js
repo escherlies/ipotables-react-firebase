@@ -11,7 +11,7 @@ export default function ListWithLinksAndTitle({ items, title, contentRenderer, l
     {
       _.map(items, (item, key) => (
         <ListItemDiv key={key}>
-          <Link to={linkConstructor(key)}>
+          <Link to={linkConstructor(item, key)}>
             <div>
               {contentRenderer(item, key)}
             </div>

@@ -17,7 +17,7 @@ class ThingsList extends Component {
   render() {
     const { modules } = this.props
 
-    const linkConstructor = key => `/modules/${key}`
+    const linkConstructor = ( item, key ) => `/modules/${key}`
 
     return <ListWithLinksAndTitle
       items={modules}
