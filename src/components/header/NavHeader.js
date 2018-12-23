@@ -1,17 +1,17 @@
 import React from 'react';
-import { Route } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Logo from '../../assets/logo.png'
-import { HomeButton, BackButton } from './NavButtons';
+import styled from 'styled-components'
 
-const NavHeader = props => (<Route path='/' render={() => (
-  <div style={{ background: '#F1f1f1',  }}>
+const NavHeader = props => (
+  <div style={{ background: '#F1f1f1', }}>
     <div style={{
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'center',
-      alignItems: 'flex-start',
+      alignItems: 'center',
       flexWrap: 'wrap',
-      minHeight: 100,
+      minHeight: 80,
       padding: 15,
       maxWidth: 768,
       margin: 'auto',
@@ -19,17 +19,29 @@ const NavHeader = props => (<Route path='/' render={() => (
       <div style={{
         flex: 1,
       }}>
-        <Route path='/' component={HomeButton} />
-        <Route path='/:nav' component={BackButton} />
+        <StyledLink><Link to="/">Home</Link></StyledLink>
+        <StyledLink><Link to="/modules">Modules</Link></StyledLink>
+        <StyledLink><Link to="/things">Things</Link></StyledLink>
       </div>
-      <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
-        <img src={Logo} alt="ipo logo" style={{ height: 75, objectFit: 'contain' }} />
-      </div>
-      <div style={{ flex: 1, textAlign: 'right' }}>
-        <h1>IPO Tables</h1>
-      </div>
+      <div style={{ flex: 1, }}>
+        <img src={Logo} alt="ipo logo" style={{ height: 60, objectFit: 'contain', float: 'right' }} />
+      </div >
     </div>
   </div>)
-} />)
+
 
 export default NavHeader
+
+
+const StyledLink = styled.span`
+
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 20px;
+  color: #EA526F;
+  padding-right: 16px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`
