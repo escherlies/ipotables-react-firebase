@@ -3,14 +3,16 @@ import _ from 'lodash'
 import ListItem from '../ListItem';
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faSignInAlt, faSignOutAlt, faLemon } from '@fortawesome/free-solid-svg-icons'
+import ListWithLinksAndTitle from '../ui/ListWithLinksAndTitle'
 
 
 class Thing extends Component {
 
   state = {}
 
-  renderNodes = (nodes, modules) => _.map(nodes, (module, key) => <ListItem title={_.get(modules, `${key}.title`)} linkTo={`/modules/${key}`} />)
+  renderNodes = (modules) => (node, key) => <ListItem title={_.get(modules, `${key}.title`)} />
+
 
   render() {
 
@@ -20,23 +22,25 @@ class Thing extends Component {
 
     return (
       <div>
-        <h2>{thing.name}</h2>
+        <TitledInputWrapper>
+          <ModuleTitle><FontAwesomeIcon icon={faLemon} /><span style={{ paddingLeft: 8 }}>Thing: {thing.name}</span></ModuleTitle>
+        </TitledInputWrapper>
         <FlexBox >
           <Column>
-            <Header><FontAwesomeIcon icon={faSignInAlt} /> Ingredient to</Header>
-            <div>
-              {
-                this.renderNodes(thing.inputOf, modules)
-              }
-            </div>
+            <ListWithLinksAndTitle
+              items={thing.inputOf}
+              title={<div><FontAwesomeIcon icon={faSignInAlt} /><span style={{ paddingLeft: 8 }}>Ingredient to</span></div>}
+              contentRenderer={this.renderNodes(modules)}
+              linkConstructor={key => `/modules/${key}`}
+            />
           </Column>
           <Column>
-            <Header><FontAwesomeIcon icon={faSignOutAlt} /> Result of</Header>
-            <div>
-              {
-                this.renderNodes(thing.outputOf, modules)
-              }
-            </div>
+            <ListWithLinksAndTitle
+              items={thing.outputOf}
+              title={<div><FontAwesomeIcon icon={faSignOutAlt} /><span style={{ paddingLeft: 8 }}>Output of</span></div>}
+              contentRenderer={this.renderNodes(modules)}
+              linkConstructor={key => `/modules/${key}`}
+            />
           </Column>
         </FlexBox>
       </div>
@@ -63,4 +67,22 @@ const Column = styled.div`
   margin-top: 12px;
   flex: 1;
   min-width: 200px;
+  padding: 5px;
+`
+
+
+const ModuleTitle = styled.div`
+  display: flex;
+  flex-direction: row;
+  font-size: 1.2rem;
+  background: #026699;
+  padding: 15px;
+  border-radius: 5px;
+  font-weight: 600;
+  color: #F8F7F7;
+`
+
+export const TitledInputWrapper = styled.div`
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
 `
