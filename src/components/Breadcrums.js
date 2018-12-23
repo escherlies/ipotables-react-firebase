@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Route, Link as LinkRoute } from 'react-router-dom'
 import _ from 'lodash'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components'
 
 
@@ -12,13 +12,13 @@ export default class Breadcrums extends Component {
 
   render() {
 
-    const ArrowRight = () => <FontAwesomeIcon style={{ paddingLeft: 5, paddingRight: 5, color: '#EF476F' }} icon={faChevronRight} />
+    const ArrowRight = () => <FontAwesomeIcon style={{ paddingLeft: 5, paddingRight: 5, color: '#696969' }} icon={faCaretRight} />
     const Link = props => <StyledLink><LinkRoute {...props} /></StyledLink>
 
     return (
       <div style={{ maxWidth: 768, margin: 'auto', padding: 8 }} >
 
-        <Link to="/">Home</Link>
+        <Link to="/">IPO Tables</Link>
         <Route path='/:menu' render={({ match }) => <span><ArrowRight /><Link to={'/' + match.params.menu}>{_.upperFirst(match.params.menu)}</Link></span>} />
         <Route path='/:menu/:id' render={({ match }) => {
 
@@ -38,8 +38,10 @@ export default class Breadcrums extends Component {
 const StyledLink = styled.span`
 
   cursor: pointer;
+  color: #494949;
 
   &:hover {
     text-decoration: underline;
+    color: #EF476F;
   }
 `
