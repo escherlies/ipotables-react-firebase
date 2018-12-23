@@ -3,7 +3,7 @@ import _ from 'lodash'
 import ListItem from '../ListItem';
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSignInAlt, faSignOutAlt, faMagic, faInfoCircle, faCube } from '@fortawesome/free-solid-svg-icons'
+import { faSignInAlt, faSignOutAlt, faMagic, faCube } from '@fortawesome/free-solid-svg-icons'
 import AddThing from './AddThing';
 import faker from 'faker'
 import ButtonColored from '../ui/buttons/ButtonColored';
@@ -158,10 +158,6 @@ class IpoModule extends Component {
 }
 
 export default IpoModule
-
-const Seperator = styled.div`
-  height: ${props => `${props.height}px` || 18};
-`
 
 const FlexBox = styled.div`
   display: flex;

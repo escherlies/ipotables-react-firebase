@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter, Route, Link as LinkRoute } from 'react-router-dom'
+import { Route, Link as LinkRoute } from 'react-router-dom'
 import _ from 'lodash'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';

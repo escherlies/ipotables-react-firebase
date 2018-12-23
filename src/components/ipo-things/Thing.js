@@ -50,12 +50,6 @@ class Thing extends Component {
 
 export default Thing
 
-
-const Header = styled.div`
-  padding: 8px;
-  font-size: 1.2em;
-  color: #EF476F;
-`
 const FlexBox = styled.div`
   display: flex;
   flex-direction: row;
