@@ -15,7 +15,7 @@ const LabeledTextInput = props => {
     props.context.setState({ values })
   }
 
-  const { field, type, disabled } = props
+  const { field, type, disabled, placeholder } = props
   const value = _.get(props.context.state, `values.${field}`)
   const error = _.get(props.context.state, `errors.${field}`)
 
@@ -23,11 +23,12 @@ const LabeledTextInput = props => {
     <Label>{props.label}</Label>
     <div style={{ background: '#BCCAD1', paddingBottom: 3, borderRadius: 8 }}>
       <Input
-        value={value}
+        value={value || ''}
         onChange={handleChange}
         type={type}
         error={error}
         disabled={disabled}
+        placeholder={placeholder}
       />    {
         error && <Error>{error}</Error>
       }
