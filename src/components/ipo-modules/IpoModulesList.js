@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import ListWithLinksAndTitle from '../ui/ListWithLinksAndTitle';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faCube } from '@fortawesome/free-solid-svg-icons';
 
 
 class ThingsList extends Component {
@@ -21,7 +19,7 @@ class ThingsList extends Component {
 
     return <ListWithLinksAndTitle
       items={modules}
-      title={<div><FontAwesomeIcon icon={faCube} /><span style={{ paddingLeft: 8 }}>Modules</span></div>}
+      title={<div><span style={{ paddingLeft: 8 }}>Modules</span></div>}
       contentRenderer={this.contentRenderer}
       linkConstructor={linkConstructor}
     />

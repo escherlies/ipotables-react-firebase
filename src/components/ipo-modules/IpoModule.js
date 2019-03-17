@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import _ from 'lodash'
 import ListItem from '../ListItem';
 import styled from 'styled-components'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSignInAlt, faSignOutAlt, faMagic, faCube } from '@fortawesome/free-solid-svg-icons'
 import AddThing from './AddThing';
 import faker from 'faker'
 import ButtonColored from '../ui/buttons/ButtonColored';
@@ -98,7 +96,7 @@ class IpoModule extends Component {
 
         <TitledInputWrapper>
           <ModuleTitle>
-            <FontAwesomeIcon icon={faCube} /><TitleInput name="title" value={title} onChange={this.handleTextInputChange} disabled={readOnly} />
+            <TitleInput name="title" value={title} onChange={this.handleTextInputChange} disabled={readOnly} />
           </ModuleTitle>
           <Input name="moduleDescription" value={moduleDescription} onChange={this.handleTextInputChange} disabled={readOnly} />
         </TitledInputWrapper>
@@ -107,7 +105,7 @@ class IpoModule extends Component {
           <Column>
             <ListWithLinksAndTitle
               items={inputs}
-              title={<div><FontAwesomeIcon icon={faSignInAlt} /><span style={{ paddingLeft: 8 }}>INPUTS</span></div>}
+              title={<div><span style={{ paddingLeft: 8 }}>INPUTS</span></div>}
               contentRenderer={this.renderThingsOfModule('inputs')}
               linkConstructor={(item, key) => `/things/${key}`}
             />
@@ -121,7 +119,7 @@ class IpoModule extends Component {
 
           <Column>
             <TitledInputWrapper>
-              <Title><FontAwesomeIcon icon={faMagic} /> PROCESS</Title>
+              <Title>PROCESS</Title>
               <Process
                 id="processDescription"
                 name="processDescription"
@@ -134,7 +132,7 @@ class IpoModule extends Component {
           <Column>
             <ListWithLinksAndTitle
               items={outputs}
-              title={<div><FontAwesomeIcon icon={faSignOutAlt} /><span style={{ paddingLeft: 8 }}>OUTPUTS</span></div>}
+              title={<div><span style={{ paddingLeft: 8 }}>OUTPUTS</span></div>}
               contentRenderer={this.renderThingsOfModule('outputs')}
               linkConstructor={(item, key) => `/things/${key}`}
             />
@@ -148,8 +146,8 @@ class IpoModule extends Component {
         <div style={{ marginTop: 30 }}>
           {
             readOnly ?
-              <ButtonColored icon={<FontAwesomeIcon icon={faCube} />} title='Edit Module' color='default' onClick={this.props.navigateToModule}></ButtonColored> :
-              <ButtonColored icon={<FontAwesomeIcon icon={faCube} />} title='Create Module' color='default' onClick={this.createModule}></ButtonColored>
+              <ButtonColored title='Edit Module' color='default' onClick={this.props.navigateToModule}></ButtonColored> :
+              <ButtonColored title='Create Module' color='default' onClick={this.createModule}></ButtonColored>
           }
         </div>
       </div>

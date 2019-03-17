@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import LabeledTextInput from './ui/LabeledTextInput'
-import { faCube, faLemon, faCheck, faHandPointRight } from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ButtonColored from './ui/buttons/ButtonColored';
@@ -38,7 +38,7 @@ export default class Home extends Component {
         {!_.isEmpty(selectedModules) &&
           <ListWithLinksAndTitle
             items={selectedModules}
-            title={<div><FontAwesomeIcon icon={faHandPointRight} /><span style={{ paddingLeft: 8 }}>Found these modules in the database:</span></div>}
+            title={<div><FontAwesomeIcon /><span style={{ paddingLeft: 8 }}>Found these modules in the database:</span></div>}
             contentRenderer={(module) => <ListItem key={module.key} title={module.title} linkTo={`modules/${module.key}`} />}
             linkConstructor={(item, key) => `/modules/${item.key}`}
           />
@@ -51,10 +51,10 @@ export default class Home extends Component {
         flexDirection: 'row',
       }}>
         <Link to='/modules' style={{ flex: 1, margin: 5 }}>
-          <ButtonColored title={'Modules'} color='blue' icon={<FontAwesomeIcon icon={faCube} />} />
+          <ButtonColored title={'Modules'} color='blue'  />
         </Link>
         <Link to='/things' style={{ flex: 1, margin: 5 }}>
-          <ButtonColored title={'Things'} color='blue' icon={<FontAwesomeIcon icon={faLemon} />} />
+          <ButtonColored title={'Things'} color='blue'  />
         </Link>
       </div>
     </div >)

@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import _ from 'lodash'
 import ListItem from '../ListItem';
 import styled from 'styled-components'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSignInAlt, faSignOutAlt, faLemon } from '@fortawesome/free-solid-svg-icons'
 import ListWithLinksAndTitle from '../ui/ListWithLinksAndTitle'
 
 
@@ -23,13 +21,13 @@ class Thing extends Component {
     return (
       <div>
         <TitledInputWrapper>
-          <ModuleTitle><FontAwesomeIcon icon={faLemon} /><span style={{ paddingLeft: 8 }}>Thing: {thing.name}</span></ModuleTitle>
+          <ModuleTitle><span style={{ paddingLeft: 8 }}>Thing: {thing.name}</span></ModuleTitle>
         </TitledInputWrapper>
         <FlexBox >
           <Column>
             <ListWithLinksAndTitle
               items={thing.inputOf}
-              title={<div><FontAwesomeIcon icon={faSignInAlt} /><span style={{ paddingLeft: 8 }}>Ingredient to</span></div>}
+              title={<div><span style={{ paddingLeft: 8 }}>Input of</span></div>}
               contentRenderer={this.renderNodes(modules)}
               linkConstructor={(item, key) => `/modules/${key}`}
             />
@@ -37,7 +35,7 @@ class Thing extends Component {
           <Column>
             <ListWithLinksAndTitle
               items={thing.outputOf}
-              title={<div><FontAwesomeIcon icon={faSignOutAlt} /><span style={{ paddingLeft: 8 }}>Output of</span></div>}
+              title={<div><span style={{ paddingLeft: 8 }}>Output of</span></div>}
               contentRenderer={this.renderNodes(modules)}
               linkConstructor={(item, key) => `/modules/${key}`}
             />
