@@ -23,13 +23,13 @@ export default class Home extends Component {
     const selectedModules = inputValue && _.filter(modulesMap, (module, key) => module.title.toLowerCase().includes(inputValue.toLowerCase()))
 
     return (<div styles={{ maxWidth: 400, }}>
-      <h3>Get started</h3>
+      <h3>What do you want to document?</h3>
       <div style={{
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'flex-end',
       }}>
-        <LabeledTextInput label='What do you want to document?' field='get-started-input' context={this} placeholder={'Coffee...'} />
+        <LabeledTextInput field='get-started-input' context={this} placeholder={'Start typing…'} />
         <div style={{ width: 75 }}>
           <ButtonColored icon={<FontAwesomeIcon icon={faCheck} />} color='blue' onClick={() => this.props.createNewModule(inputValue)} />
         </div>
@@ -45,7 +45,7 @@ export default class Home extends Component {
         }
       </div>
 
-      <h3>View all existing</h3>
+      <h3>View existing</h3>
       <div style={{
         display: 'flex',
         flexDirection: 'row',

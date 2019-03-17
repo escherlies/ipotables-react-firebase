@@ -20,7 +20,10 @@ const LabeledTextInput = props => {
   const error = _.get(props.context.state, `errors.${field}`)
 
   return <div style={styles.itemView}>
-    <Label>{props.label}</Label>
+    {
+      props.label &&
+      <Label>{props.label}</Label>
+    }
     <div style={{ background: '#BCCAD1', paddingBottom: 3, borderRadius: 8 }}>
       <Input
         value={value || ''}

@@ -3,6 +3,10 @@ import _ from 'lodash'
 import ListItem from '../ListItem';
 import styled from 'styled-components'
 import ListWithLinksAndTitle from '../ui/ListWithLinksAndTitle'
+import { Link } from 'react-router-dom'
+
+import StyledLink from '../ui/StyledLink'
+
 
 
 class Thing extends Component {
@@ -21,7 +25,7 @@ class Thing extends Component {
     return (
       <div>
         <TitledInputWrapper>
-          <ModuleTitle><span style={{ paddingLeft: 8 }}>Thing: {thing.name}</span></ModuleTitle>
+          <ModuleTitle><span style={{ paddingLeft: 8 }}>{thing.name}</span></ModuleTitle>
         </TitledInputWrapper>
         <FlexBox >
           <Column>
@@ -41,6 +45,10 @@ class Thing extends Component {
             />
           </Column>
         </FlexBox>
+        <div style={{ textAlign: 'center', paddingTop: 15}}>
+
+        <StyledLink><Link to="/modules/add-new-module">+ Add Module</Link></StyledLink>
+        </div>
       </div>
     )
   }

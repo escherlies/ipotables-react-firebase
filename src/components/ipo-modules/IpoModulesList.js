@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import ListWithLinksAndTitle from '../ui/ListWithLinksAndTitle';
-
+import StyledLink from '../ui/StyledLink'
 
 class ThingsList extends Component {
 
@@ -19,7 +20,13 @@ class ThingsList extends Component {
 
     return <ListWithLinksAndTitle
       items={modules}
-      title={<div><span style={{ paddingLeft: 8 }}>Modules</span></div>}
+      title={<div>
+        <span style={{ paddingLeft: 8 }}>Modules</span>
+        <span style={{ paddingRight: 8, float: 'right' }}>
+          <StyledLink><Link to="/modules/add-new-module">+ Add Module</Link></StyledLink>
+        </span>
+      
+      </div>}
       contentRenderer={this.contentRenderer}
       linkConstructor={linkConstructor}
     />
