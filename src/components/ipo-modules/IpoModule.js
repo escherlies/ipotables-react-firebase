@@ -107,7 +107,7 @@ class IpoModule extends Component {
               items={inputs}
               title={<div><span style={{ paddingLeft: 8 }}>INPUTS</span></div>}
               contentRenderer={this.renderThingsOfModule('inputs')}
-              linkConstructor={(item, key) => `/things/${key}`}
+              linkConstructor={!readOnly ? () => "#" : (item, key) => `/things/${key}`}
             />
 
             {
@@ -134,7 +134,7 @@ class IpoModule extends Component {
               items={outputs}
               title={<div><span style={{ paddingLeft: 8 }}>OUTPUTS</span></div>}
               contentRenderer={this.renderThingsOfModule('outputs')}
-              linkConstructor={(item, key) => `/things/${key}`}
+              linkConstructor={!readOnly ? () => "#" : (item, key) => `/things/${key}`}
             />
             {
               !readOnly &&
@@ -147,7 +147,7 @@ class IpoModule extends Component {
           {
             readOnly ?
               <ButtonColored title='Edit Module' color='default' onClick={this.props.navigateToModule}></ButtonColored> :
-              <ButtonColored title='Create Module' color='default' onClick={this.createModule}></ButtonColored>
+              <ButtonColored title='Save Module' color='default' onClick={this.createModule}></ButtonColored>
           }
         </div>
       </div>

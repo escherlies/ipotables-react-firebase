@@ -8,12 +8,12 @@ import slugify from 'slugify';
 import firebaseApp from '../../functions/firebaseApp'
 import PropTypes from 'prop-types'
 
-
-
 class AddThing extends Component {
 
   state = {
-    selectedOption: ''
+    selectedOption: '',
+    inputValue: '',
+    submitOnEnter: false,
   }
 
   getOptionValueAndLabel = option => ({ value: option.key, label: option.name })
@@ -57,7 +57,7 @@ class AddThing extends Component {
     // send selected data to parent component
     this.props.addThing(key)
 
-    this.setState({ selectedOption: null })
+    this.setState({ selectedOption: null, submitOnEnter: false })
   }
 
 
@@ -66,7 +66,10 @@ class AddThing extends Component {
     const { options } = this.props
 
     return (
-      <Container>
+      <Container onKeyDownCapture={event => {
+        const key = event.key
+        this.setState((state) => ({ ...state, submitOnEnter: key === 'Enter' }))
+      }}>
         <Seperator height={5} />
         <div>Add new thing to the list:</div>
         <Seperator height={5} />
@@ -78,7 +81,13 @@ class AddThing extends Component {
           isValidNewOption={this.isValidNewOption}
           isClearable
           value={this.state.selectedOption}
-          onChange={(selectedOption, action) => this.setState({ selectedOption })}
+          onChange={(selectedOption, action) => {
+            this.setState({ selectedOption }, () => this.state.submitOnEnter && this.handleSubmit())
+            console.log(action, selectedOption)
+          }}
+          onKeyDown={event => console.log(event.key)}
+          onInputChange={inputValue => this.setState((state) => ({ ...state, inputValue }))}
+          menuIsOpen={this.state.inputValue.length > 0}
         />
         <Seperator height={5} />
         <ButtonColored title='Add Thing' color='yellow' icon={<FontAwesomeIcon icon={faPlus} />} onClick={this.handleSubmit} />
