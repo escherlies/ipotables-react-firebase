@@ -146,7 +146,11 @@ class IpoModule extends Component {
         <div style={{ marginTop: 30 }}>
           {
             readOnly ?
-              <ButtonColored title='Edit Module' color='default' onClick={this.props.navigateToModule}></ButtonColored> :
+              (
+                firebaseApp.auth().currentUser ?
+                  <ButtonColored title='Edit Module' color='default' onClick={this.props.navigateToModule}></ButtonColored> :
+                  null
+              ) :
               <ButtonColored title='Save Module' color='default' onClick={this.createModule}></ButtonColored>
           }
         </div>

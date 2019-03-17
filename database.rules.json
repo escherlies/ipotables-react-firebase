@@ -1,6 +1,6 @@
 {
   "rules": {
     ".read": true,
-    ".write": "newData.exists()"
+    ".write": "auth !== null || !data.exists()"
   }
 }
