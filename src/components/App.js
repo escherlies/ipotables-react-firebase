@@ -9,6 +9,8 @@ import Thing from './ipo-things/Thing';
 import Home from './Home';
 import NavHeader from './header/NavHeader';
 import Breadcrums from './Breadcrums';
+import Login from './Login';
+import firebaseApp from '../functions/firebaseApp';
 
 class App extends Component {
 
@@ -18,6 +20,15 @@ class App extends Component {
 
   componentDidMount() {
     base.bindToState('/', { context: this, state: 'data' })
+    firebaseApp.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        // User is signed in.
+        console.log('User signed in')
+      } else {
+        console.log('User logged out')
+
+      }
+    });
   }
 
   render() {
@@ -33,6 +44,8 @@ class App extends Component {
           <Breadcrums data={{ things, modules }} />
           
           <div style={{ padding: 15, maxWidth: 768, margin: 'auto' }}>
+
+            <Route path="/login" component={Login}/>
 
             <Route exact path='/' render={({ history }) => <Home modules={modules} context={this} createNewModule={title => history.push(`/modules/add-new-module/${title}`)} />} />
 
