@@ -42,14 +42,15 @@ class AddThing extends Component {
 
   }
 
-  handleSubmit = (selectedOption) => {
+  handleSubmit = async (selectedOption) => {
 
+    console.log(selectedOption)
     if (!selectedOption) return null
 
     const { key, name, isNewOption } = selectedOption
 
     // update firebase
-    if (isNewOption) firebaseApp.database().ref(`/things/${key}/name`).set(name)
+    if (isNewOption) await firebaseApp.database().ref(`/things/${key}/name`).set(name)
 
     // send selected data to parent component
     this.props.addThing(key)
