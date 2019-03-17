@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import ButtonColored from '../ui/buttons/ButtonColored'
 import Creatable from 'react-select/lib/Creatable';
 import slugify from 'slugify';
 import firebaseApp from '../../functions/firebaseApp'
@@ -104,9 +101,6 @@ AddThing.propTypes = {
 
 export default AddThing
 
-const Seperator = styled.div`
-  height: ${props => `${props.height}px` || 18};
-`
 
 const Container = styled.div`
   background: #F6F6F6;

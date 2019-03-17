@@ -14,7 +14,7 @@ class Login extends Component {
 
     firebase.auth().signInWithEmailAndPassword(email, pw).catch(function (error) {
       // Handle Errors here.
-      var errorCode = error.code;
+      // var errorCode = error.code;
       var errorMessage = error.message;
       // ...
       if (errorMessage) return window.alert(errorMessage)
@@ -35,7 +35,7 @@ class Login extends Component {
 
     firebase.auth().createUserWithEmailAndPassword(email, pw).catch(function (error) {
       // Handle Errors here.
-      var errorCode = error.code;
+      // var errorCode = error.code;
       var errorMessage = error.message;
       // ...
       if (errorMessage) return window.alert(errorMessage)
