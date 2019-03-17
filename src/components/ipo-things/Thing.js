@@ -74,15 +74,15 @@ const Column = styled.div`
 const ModuleTitle = styled.div`
   display: flex;
   flex-direction: row;
-  font-size: 1.2rem;
-  background: #026699;
-  padding: 15px;
+  font-size: 1.4rem;
+  /* background: #026699; */
+  /* padding: 15px; */
   border-radius: 5px;
   font-weight: 600;
-  color: #F8F7F7;
+  /* color: #F8F7F7; */
 `
 
 export const TitledInputWrapper = styled.div`
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
-  border-radius: 5px;
+  /* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15); */
+  /* border-radius: 5px; */
 `

@@ -5,7 +5,7 @@ import StyledLink from '../ui/StyledLink'
 
 
 const NavHeader = props => (
-  <div style={{ background: '#F1f1f1', }}>
+  <div style={{ background: '#D3D7DD', }}>
     <div style={{
       display: 'flex',
       flexDirection: 'row',

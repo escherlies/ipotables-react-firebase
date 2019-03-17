@@ -45,11 +45,11 @@ class AddThing extends Component {
 
   }
 
-  handleSubmit = () => {
+  handleSubmit = (selectedOption) => {
 
-    if (!this.state.selectedOption) return null
+    if (!selectedOption) return null
 
-    const { key, name, isNewOption } = this.state.selectedOption
+    const { key, name, isNewOption } = selectedOption
 
     // update firebase
     if (isNewOption) firebaseApp.database().ref(`/things/${key}/name`).set(name)
@@ -70,10 +70,8 @@ class AddThing extends Component {
         const key = event.key
         this.setState((state) => ({ ...state, submitOnEnter: key === 'Enter' }))
       }}>
-        <Seperator height={5} />
-        <div>Add new thing to the list:</div>
-        <Seperator height={5} />
         <Creatable
+          placeholder={'Add thing…'}
           options={options}
           getOptionLabel={option => this.getOptionValueAndLabel(option).label}
           getOptionValue={option => this.getOptionValueAndLabel(option).value}
@@ -81,16 +79,13 @@ class AddThing extends Component {
           isValidNewOption={this.isValidNewOption}
           isClearable
           value={this.state.selectedOption}
-          onChange={(selectedOption, action) => {
-            this.setState({ selectedOption }, () => this.state.submitOnEnter && this.handleSubmit())
-            console.log(action, selectedOption)
-          }}
+          onChange={(selectedOption, action) => this.handleSubmit(selectedOption)}
           onKeyDown={event => console.log(event.key)}
           onInputChange={inputValue => this.setState((state) => ({ ...state, inputValue }))}
           menuIsOpen={this.state.inputValue.length > 0}
         />
-        <Seperator height={5} />
-        <ButtonColored title='Add Thing' color='yellow' icon={<FontAwesomeIcon icon={faPlus} />} onClick={this.handleSubmit} />
+        {/* <Seperator height={5} /> */}
+        {/* <ButtonColored title='Add' color='yellow' icon={<FontAwesomeIcon icon={faPlus} />} onClick={this.handleSubmit} /> */}
       </Container>
     )
   }
@@ -115,7 +110,7 @@ const Seperator = styled.div`
 
 const Container = styled.div`
   background: #F6F6F6;
-  border-radius: 8px;
-  padding: 8px;
-  margin-top: 15px;
+  /* border-radius: 4px; */
+  /* padding: 8px; */
+  /* margin-top: 8px; */
 `

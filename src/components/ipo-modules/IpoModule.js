@@ -105,7 +105,7 @@ class IpoModule extends Component {
           <Column>
             <ListWithLinksAndTitle
               items={inputs}
-              title={<div><span style={{ paddingLeft: 8 }}>INPUTS</span></div>}
+              title={<div><span style={{ paddingLeft: 8 }}>Inputs</span></div>}
               contentRenderer={this.renderThingsOfModule('inputs')}
               linkConstructor={!readOnly ? () => "#" : (item, key) => `/things/${key}`}
             />
@@ -119,7 +119,7 @@ class IpoModule extends Component {
 
           <Column>
             <TitledInputWrapper>
-              <Title>PROCESS</Title>
+              <Title>Process</Title>
               <Process
                 id="processDescription"
                 name="processDescription"
@@ -132,7 +132,7 @@ class IpoModule extends Component {
           <Column>
             <ListWithLinksAndTitle
               items={outputs}
-              title={<div><span style={{ paddingLeft: 8 }}>OUTPUTS</span></div>}
+              title={<div><span style={{ paddingLeft: 8 }}>Outputs</span></div>}
               contentRenderer={this.renderThingsOfModule('outputs')}
               linkConstructor={!readOnly ? () => "#" : (item, key) => `/things/${key}`}
             />
@@ -167,21 +167,36 @@ const FlexBox = styled.div`
 `
 
 const TitleInput = styled.input`
-    all: unset;
-    background: transparent;
-    width: 100%;
-    margin-left: 8px;
+    font-size: unset;
+    font-family: unset;
+    width: calc(100% - 2*15px);
+    /* margin: 8px; */
+    border-radius: 4px;
+    border: 1px solid hsl(0,0%,80%);
+    padding: 8px;
+    &:disabled {
+      all: unset;
+
+    }
 `
 
 const Input = styled.input`
-    all: unset;
-    background: #F6F6F6;
-    border-radius: 0 0 8px 8px;
-    padding: 15px;
+    margin-top: 8px;
+    font-size: unset;
+    font-family: unset;
+    border-radius: 4px;
+    border: 1px solid hsl(0,0%,80%);
+    /* all: unset; */
+    /* background: #F6F6F6; */
+    /* border-radius: 0 0 8px 8px; */
     /* border: 1px solid #d6d6d6; */
     width: calc(100% - 2*15px);
+    padding: 8px;
     &:disabled {
-      border-bottom: 1px solid #d6d6d6;
+      all: unset;
+          margin-top: 8px;
+      /* border-bottom: 1px solid #d6d6d6; */
+      /* all: initial; */
     }
 `
 
@@ -189,40 +204,66 @@ const ModuleTitle = styled.div`
   display: flex;
   flex-direction: row;
   font-size: 1.2rem;
-  background: #026699;
-  padding: 15px;
-  border-radius: 5px 5px 0 0;
+  /* background: #026699; */
+  /* padding: 8px; */
+  /* border-radius: 5px 5px 0 0; */
   font-weight: 600;
-  color: #F8F7F7;
+  /* color: #F8F7F7; */
+  
 `
 
 const Title = styled.div`
 
   font-size: 1.2rem;
-  background: #026699;
-  padding: 15px;
-  border-radius: 5px 5px 0 0;
+  /* background: #026699; */
+  padding: 8px;
+  /* border-radius: 5px 5px 0 0; */
   font-weight: 600;
-  color: #F8F7F7;
+  /* color: #F8F7F7; */
 `
 
 
 const Process = styled.textarea`
   /* all: unset; */
   font-size: unset;
-  border: unset;
-  resize: vertical;
-  border-radius: 0 0 8px 8px;
-  padding: 15px;
-  width: calc(100% - 2*15px);
+  border-radius: 4px;
   height: 155px;
-  background: #F9F8F8;
-  margin-bottom: -3px;
-  user-select: auto;
+  width: calc(100% - 2*15px);
+  resize: vertical;
+  border: 1px solid hsl(0,0%,80%);
+  padding: 8px;
 
   &:disabled {
-    background: #F9F8F8;
+    border: unset;
+    color: unset;
+    background: transparent;
+    margin-bottom: -3px;
+    user-select: auto;
+    overflow-y: scroll;
+    border: 1px solid hsl(0,0%,80%);
   }
+
+  /* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+  height: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
 `
 
 const Column = styled.div`
@@ -231,6 +272,6 @@ const Column = styled.div`
 `
 
 const TitledInputWrapper = styled.div`
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
-  border-radius: 5px;
+  /* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15); */
+  /* border-radius: 5px; */
 `

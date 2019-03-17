@@ -6,8 +6,10 @@ import styled from 'styled-components'
 
 export default function ListWithLinksAndTitle({ items, title, contentRenderer, linkConstructor }) {
 
-  return <div style={{ borderRadius: 5, boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.15)" }}>
+  return <div style={{ borderRadius: 5, boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0)" }}>
     <Title>{title}</Title>
+    <div>
+
     {
       _.map(items, (item, key) => (
         <ListItemDiv key={key}>
@@ -19,6 +21,7 @@ export default function ListWithLinksAndTitle({ items, title, contentRenderer, l
         </ListItemDiv>
       ))
     }
+    </div>
   </div>
 
 }
@@ -29,11 +32,11 @@ export default function ListWithLinksAndTitle({ items, title, contentRenderer, l
 const Title = styled.div`
 
   font-size: 1.2rem;
-  background: #026699;
-  padding: 15px;
-  border-radius: 5px 5px 0 0;
+  /* background: #026699; */
+  padding: 8px;
+  /* border-radius: 5px 5px 0 0; */
   font-weight: 600;
-  color: #F8F7F7;
+  color: black;
 `
 
 
@@ -41,12 +44,12 @@ const Title = styled.div`
 const ListItemDiv = styled.div`
 
   background: #F9F8F8;
-  padding-left: 20px;
+  padding-left: 12px;
 
   cursor: pointer;
 
   & > * > div {
-    padding: 20px 5px;
+    padding: 12px 5px;
     border-bottom: 1px solid #D6D6D6;
   }
   
@@ -61,11 +64,11 @@ const ListItemDiv = styled.div`
   
   &:first-of-type {
     border-width: 1px 1px 1px 1px;
-    border-radius: none;
+    border-radius: 4px 4px 0px 0px;
   }
   
   &:last-of-type {
-    border-radius: 0px 0px 8px 8px;
+    border-radius: 0px 0px 4px 4px;
 
     & div {
       border-bottom: none;
@@ -73,7 +76,7 @@ const ListItemDiv = styled.div`
   }
   
   &:only-of-type {
-    border-radius: 8px;
+    border-radius: 4px;
   }
 `
 
