@@ -23,6 +23,20 @@ class Login extends Component {
 
   }
 
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged( (user) => {
+      if (user) {
+        // User is signed in.
+        this.setState({loggedIn: true})
+        console.log('User signed in')
+      } else {
+        this.setState({loggedIn: false})
+        console.log('User logged out')
+
+      }
+    });
+  }
+
   register = (event) => {
     event.preventDefault()
 
@@ -47,7 +61,7 @@ class Login extends Component {
     return (
       <div style={{}} >
         <h3>Status</h3>
-        <div>{firebase.auth().currentUser ? 'Logged Out' : 'Logged In'}</div>
+        <div>{this.state.loggedIn ? 'Logged In' : 'Logged Out'}</div>
       <h3>Log In</h3>
         <form action="" onSubmit={this.login}>
           <div>Email:</div>

@@ -20,6 +20,7 @@ class App extends Component {
 
   componentDidMount() {
     base.bindToState('/', { context: this, state: 'data' })
+    
     firebaseApp.auth().onAuthStateChanged(function (user) {
       if (user) {
         // User is signed in.
