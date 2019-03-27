@@ -9,7 +9,7 @@
     },
     "things": {
       "$thing": {
-        ".write": "!data.exists()"
+        ".write": "!data.exists() || newData.exists()"
       }
     }
   }
