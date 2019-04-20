@@ -63,6 +63,31 @@ class IpoModule extends Component {
     this.setState({ [name]: value })
   }
 
+
+  deleteModule = () => {
+    const updates = {}
+
+    // module
+    const moduleKey = this.props.moduleKey
+
+    if (!moduleKey) return
+
+    updates[`modules/${moduleKey}`] = null
+
+    // remove module reference to things
+    const targetPath = {
+      inputs: 'inputOf',
+      outputs: 'outputOf',
+    }
+
+    const addReference = (targetPath, target) => _.forEach(_.get(this.state, target), (value, key) => _.set(updates, `things/${key}/${targetPath}/${moduleKey}`, null))
+    _.forEach(targetPath, addReference)
+
+    window.confirm('Modul löschen?') && firebaseApp.database().ref().update(updates)
+      .then(window.confirm('Done!') && this.props.goBack())
+      .catch(e => window.alert(e))
+  }
+
   createModule = () => {
 
     const updates = {}
@@ -148,7 +173,11 @@ class IpoModule extends Component {
             readOnly ?
               (
                 firebaseApp.auth().currentUser ?
-                  <ButtonColored title='Edit Module' color='default' onClick={this.props.navigateToModule}></ButtonColored> :
+                  <>
+                    <ButtonColored title='Edit Module' color='default' onClick={this.props.navigateToModule} />
+                    <ButtonColored title='Delete' color='red' onClick={this.deleteModule} />
+                  </>
+                  :
                   null
               ) :
               <ButtonColored title='Save Module' color='default' onClick={this.createModule}></ButtonColored>

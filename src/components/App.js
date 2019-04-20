@@ -58,7 +58,7 @@ class App extends Component {
               <Route exact path='/modules/add-new-module/:moduleTitle' render={({ match, history }) => <IpoModule things={things} goBack={() => history.push('/modules')} module={{ title: match.params.moduleTitle }} />} />
               <Route exact path='/modules/add-new-module' render={({ history }) => <IpoModule things={things} goBack={() => history.push('/modules')} />} />
               <Route exact path='/modules/:moduleKey/edit' render={({ match, history }) => <IpoModule moduleKey={match.params.moduleKey} things={things} module={_.get(modules, match.params.moduleKey)} goBack={() => history.push('/modules')} />} />
-              <Route exact path='/modules/:moduleKey' render={({ match, history }) => <IpoModule moduleKey={match.params.moduleKey} things={things} readOnly={true} module={_.get(modules, match.params.moduleKey)} navigateToModule={() => history.push(`/modules/${match.params.moduleKey}/edit`)} />} />
+              <Route exact path='/modules/:moduleKey' render={({ match, history }) => <IpoModule moduleKey={match.params.moduleKey} things={things} readOnly={true} module={_.get(modules, match.params.moduleKey)} goBack={() => history.push('/modules')} navigateToModule={() => history.push(`/modules/${match.params.moduleKey}/edit`)} />} />
             </Switch>
           </div>
 
