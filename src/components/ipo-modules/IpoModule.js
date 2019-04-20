@@ -124,7 +124,7 @@ class IpoModule extends Component {
       .then(() => {
         window.confirm('Done!')
         localStorage.setItem('add-new-module', '')
-        this.props.goBack() // TODO: navigate to newly created module
+        this.props.history.push(`/modules/${moduleKey}`) // TODO: navigate to newly created module
       })
       .catch(e => window.alert(e))
   }
@@ -204,6 +204,7 @@ class IpoModule extends Component {
                 firebaseApp.auth().currentUser ?
                   <>
                     <ButtonColored title='Edit Module' color='default' onClick={this.props.navigateToModule} />
+                    <br/>
                     <ButtonColored title='Delete' color='red' onClick={this.deleteModule} />
                   </>
                   :
