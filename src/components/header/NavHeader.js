@@ -24,7 +24,7 @@ const NavHeader = props => (
         <StyledLink><Link to="/">Home</Link></StyledLink>
         <StyledLink><Link to="/modules">Modules</Link></StyledLink>
         <StyledLink><Link to="/things">Things</Link></StyledLink>
-        <StyledLink><Link to="http://ipo.opencircularity.info/">Documentation</Link></StyledLink>
+        <StyledLink><a href="https://ipo.opencircularity.info/">Documentation</a></StyledLink>
       </div>
       <div>
         <img src={Logo} alt="ipo logo" style={{ height: 60, objectFit: 'contain', float: 'right' }} />

@@ -21,6 +21,11 @@ class IpoModule extends Component {
 
   componentDidMount() {
     this.props.module && this.setState({ ...this.props.module })
+
+    // if new, check for localstorage changes
+    const savedState = localStorage.getItem('add-new-module')
+    console.log(savedState)
+    savedState && this.setState(JSON.parse(savedState))
   }
 
   componentWillReceiveProps(nextProps) {
@@ -35,9 +40,17 @@ class IpoModule extends Component {
     })
   }
 
+
+  componentDidUpdate() {
+    // save state to localstorage
+    this.props.newModule && localStorage.setItem('add-new-module', JSON.stringify(this.state))
+  }
+
   renderThingsOfModule = target => (___, key) => {
 
     const thing = _.get(this.props, `things.${key}`)
+
+    console.log(key)
 
     return (<ListItem
       key={key}
@@ -90,6 +103,9 @@ class IpoModule extends Component {
 
   createModule = () => {
 
+    const confirm = window.confirm('Save module to database? If you are not registered you will lose editing capabilities. Feel free to come back later, all changes are saved for you locally :)')
+    if (!confirm) return
+
     const updates = {}
 
     // module
@@ -105,7 +121,11 @@ class IpoModule extends Component {
     _.forEach(targetPath, addReference)
 
     firebaseApp.database().ref().update(updates)
-      .then(window.confirm('Done!') && this.props.goBack())
+      .then(() => {
+        window.confirm('Done!')
+        localStorage.setItem('add-new-module', '')
+        this.props.goBack() // TODO: navigate to newly created module
+      })
       .catch(e => window.alert(e))
   }
 
@@ -119,11 +139,19 @@ class IpoModule extends Component {
     return (
       <div>
 
+        {
+          this.props.newModule &&
+          <div>
+            <p>Create a new module. All changes are saved locally — feel free to come back later.</p>
+          </div>
+        }
+
+
         <TitledInputWrapper>
           <ModuleTitle>
-            <TitleInput name="title" value={title} onChange={this.handleTextInputChange} disabled={readOnly} />
+            <TitleInput name="title" value={title} onChange={this.handleTextInputChange} disabled={readOnly} placeholder="Modul title…" />
           </ModuleTitle>
-          <Input name="moduleDescription" value={moduleDescription} onChange={this.handleTextInputChange} disabled={readOnly} />
+          <Input name="moduleDescription" value={moduleDescription} onChange={this.handleTextInputChange} disabled={readOnly} placeholder='Module description…'/>
         </TitledInputWrapper>
 
         <FlexBox>
@@ -148,6 +176,7 @@ class IpoModule extends Component {
               <Process
                 id="processDescription"
                 name="processDescription"
+                placeholder="Process…"
                 value={processDescription}
                 disabled={readOnly}
                 onChange={this.handleTextInputChange} />
@@ -180,7 +209,7 @@ class IpoModule extends Component {
                   :
                   null
               ) :
-              <ButtonColored title='Save Module' color='default' onClick={this.createModule}></ButtonColored>
+              <ButtonColored title='Save module to database' color='default' onClick={this.createModule}></ButtonColored>
           }
         </div>
       </div>
